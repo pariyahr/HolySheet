@@ -63,7 +63,7 @@ class Seller(models.Model):
 class Preview(models.Model):
     file = models.FileField(_('Concerto Preview File'), unique=True)
     tempo = models.IntegerField(_('preview tempo'))
-    quality = models.CharField(_('Preview Quality'))
+    quality = models.CharField(_('Preview Quality'), max_length=1000)
 
 
 class Concerto(models.Model):
@@ -73,9 +73,9 @@ class Concerto(models.Model):
     concerto_file = models.FileField(_('Concerto File Path'), unique=True)
     preview = models.OneToOneField(Preview, unique=True, on_delete=models.CASCADE)
     score = models.IntegerField(_('Concerto Score'), max_length=2)
-    genre = models.CharField(_('concerto genre'), choices=Genre.choices)
+    genre = models.CharField(_('concerto genre'), choices=Genre.choices, max_length=1000)
     description = models.CharField(_('Concerto Description'), max_length=1000)
-    quality = models.CharField(_('Concerto Quality'))
+    quality = models.CharField(_('Concerto Quality'), max_length=1000)
     owner = models.ForeignKey(Seller, unique=True, on_delete=models.CASCADE)
 
     def __str__(self):
