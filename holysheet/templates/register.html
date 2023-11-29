@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login page</title>
+    <title>Register</title>
 </head>
 <body>
-    <center> <h1> Login </h1> </center>
-    <form method="POST" action="{% url 'login' %}">
-        {% csrf_token %}
+    <center> <h1> Register </h1> </center>
+    <form>
         <div class="container">
-            <label>Username:</label>
+            <label>Username : </label>
             <input type="text" placeholder="Enter Username" name="username" required>
-            <label>Password:</label>
+            <label>Password : </label>
             <input type="password" placeholder="Enter Password" name="password" required>
+            <label>Confirm Password : </label>
+            <input type="password" placeholder="Confirm Password" name="password_confirm" required>
             <button type="submit">Login</button>
             <input type="checkbox" checked="checked"> Remember me
             <p>Back to <a href="/first_page">first page</a></p>
-            Forgot <a href="#">password?</a>
         </div>
     </form>
 </body>
