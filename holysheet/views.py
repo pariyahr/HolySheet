@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import Customer
@@ -21,12 +21,12 @@ def login(request):
         except Customer.DoesNotExist:
             # Handle the case where the username doesn't exist
             # You can add appropriate error handling or redirect the user to an error page
-            return render(request, 'first_page.html', {'error': 'Username does not exist'})
+            return redirect('first_page')
 
         # Perform any additional authentication logic here (e.g., comparing passwords)
 
         # If the authentication is successful, you can redirect the user to a success page
-        return render(request, 'first_page.html', {'customer': customer})
+        return redirect('register')
 
     return render(request, 'login.html')
 
