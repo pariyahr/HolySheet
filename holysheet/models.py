@@ -17,45 +17,32 @@ class Genre(models.TextChoices):
 
 
 class Customer(models.Model):
-    first_name = models.CharField(_('Customer First Name'), max_length=100)
-    last_name = models.CharField(_('Customer Last Name'), max_length=100)
-    national_ID = models.CharField(_('Customer national ID'), unique=True, max_length=10)
+    first_name = models.CharField(_('Customer First name'), max_length=100, default='0000000')
+    last_name = models.CharField(_('Customer Last name'), max_length=100, default='0000000')
+    username = models.CharField(_('Customer Username'), max_length=100, unique=True, default='0000000')
+    password = models.CharField(_('Customer Password'), max_length=100, default='0000000')
     contact_number = models.CharField(_('Customer Contact number'), unique=True, max_length=12)
-    gender = models.CharField(_('Customer Gender'), max_length=10)
+    gender = models.CharField(_('Customer Gender'), max_length=100, default='0000000')
     assets = models.IntegerField(_('Customer Assets To Purchase'))
     email = models.EmailField(_('Customer Email'), unique=True, max_length=100)
 
     def __str__(self):
-        return (f'Customer Full Name: {self.first_name} {self.last_name}, Customer national ID: {self.national_ID}, '
+        return (f'Customer Full Name: {self.first_name} {self.last_name}, '
                 f'Customer Contact number: {self.contact_number} ,Customer Gender: {self.gender},'
                 f' Customer Assets To Purchase: {self.assets}, Customer Email: {self.email}')
 
 
-class Manager(models.Model):
-    first_name = models.CharField(_('Manager First Name'), max_length=100)
-    last_name = models.CharField(_('Manager Last Name'), max_length=100)
-    national_ID = models.CharField(_('Manager national ID'), unique=True, max_length=10)
-    contact_number = models.CharField(_('Manager Contact number'), unique=True, max_length=12)
-    gender = models.CharField(_('Manager Gender'), max_length=10)
-    email = models.EmailField(_('Manager Email'), unique=True, max_length=100)
-
-    def __str__(self):
-        return (f'Manager Full Name: {self.first_name} {self.last_name}, Manager national ID: {self.national_ID}, '
-                f'Manager Contact number: {self.contact_number} ,Manager Gender: {self.gender},'
-                f'Manager Email: {self.email}')
-
-
 class Seller(models.Model):
-    first_name = models.CharField(_('Seller First Name'), max_length=100)
-    last_name = models.CharField(_('Seller Last Name'), max_length=100)
-    national_ID = models.CharField(_('Seller national ID'), unique=True, max_length=10)
+    first_name = models.CharField(_('Seller First name'), max_length=100, default='0000000')
+    last_name = models.CharField(_('Seller Last name'), max_length=100, default='0000000')
+    username = models.CharField(_('Seller Username'), max_length=100, unique=True, default='0000000')
+    password = models.CharField(_('Seller Password'), max_length=100, default='0000000')
+    gender = models.CharField(_('Seller Gender'), max_length=100, default='0000000')
     contact_number = models.CharField(_('Seller Contact number'), unique=True, max_length=12)
-    gender = models.CharField(_('Seller Gender'), max_length=10)
     email = models.EmailField(_('Seller Email'), unique=True, max_length=100)
-    manager = models.ForeignKey(Manager, unique=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return (f'Seller Full Name: {self.first_name} {self.last_name}, Seller national ID: {self.national_ID}, '
+        return (f'Seller Full Name: {self.first_name} {self.last_name}, '
                 f'Seller Contact number: {self.contact_number} ,Seller Gender: {self.gender},'
                 f'Seller Email: {self.email}')
 

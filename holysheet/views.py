@@ -12,12 +12,12 @@ def first_page(request):
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        Username = request.POST.get('username')
+        Password = request.POST.get('password')
 
         # Check if the username exists in the database
         try:
-            customer = Customer.objects.get(first_name=username)
+            customer = Customer.objects.get(username=Username)
         except Customer.DoesNotExist:
             # Handle the case where the username doesn't exist
             # You can add appropriate error handling or redirect the user to an error page
