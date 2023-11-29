@@ -23,7 +23,7 @@ class Customer(models.Model):
     password = models.CharField(_('Customer Password'), max_length=100, default='0000000')
     contact_number = models.CharField(_('Customer Contact number'), unique=True, max_length=12)
     gender = models.CharField(_('Customer Gender'), max_length=100, default='0000000')
-    assets = models.IntegerField(_('Customer Assets To Purchase'))
+    assets = models.IntegerField(_('Customer Assets To Purchase'), default='0000000')
     email = models.EmailField(_('Customer Email'), unique=True, max_length=100)
 
     def __str__(self):

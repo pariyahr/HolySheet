@@ -12,13 +12,13 @@ def first_page(request):
 
 def login(request):
     if request.method == 'POST':
-        Username = request.POST.get('username')
-        Password = request.POST.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         # Check if the username exists in the database
         try:
-            customer = Customer.objects.get(username=Username)
-            if customer.password == Password:
+            customer = Customer.objects.get(username=username)
+            if customer.password == password:
                 return redirect('home_page')
         except Customer.DoesNotExist:
             # Handle the case where the username doesn't exist
@@ -33,8 +33,21 @@ def login(request):
 
 
 def register(request):
-    template = loader.get_template('register.html')
-    return HttpResponse(template.render())
+    if request.method == 'POST':
+        firstname = request.POST.get('username')
+        lastname = request.POST.get('username')
+        gender = request.POST.get('username')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('password')
+        email = request.POST.get('email')
+        user = Customer.objects.create(username=username, password=password, email=email, first_name=firstname,
+                                       last_name=lastname, gender=gender)
+
+        # Perform any additional actions (e.g., login the user automatically)
+        return redirect('login')  # Redirect to the login page after successful registration
+
+    return render(request, 'register.html')
 
 def home(request):
     template = loader.get_template('home_page.html')
