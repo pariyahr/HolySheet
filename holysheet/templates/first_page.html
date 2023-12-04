@@ -1,8 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="{% static 'first_page.css' %}">
 <body>
-<h1>Holy Sheet</h1>
-<li><a href="register/"> Register </a></li>
-<li><a href="login/"> Login </a></li>
+
+<div class="bg-img">
+    <div class="content">
+        <header>Holy Sheet</header>
+
+        <div class="field">
+            <a href="login/"> Login </a>
+        </div>
+        <div class="field">
+            <a href="register/"> Register </a>
+        </div>
+        <div class="copyright">
+            <a> © alireza amiri, pariya hajipour, amirreza ghadyani</a>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

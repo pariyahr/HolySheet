@@ -1,37 +1,59 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="{% static 'first_page.css'%}">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
 </head>
-<body>
-    <center> <h1> Register </h1> </center>
-    <form method="POST" action="{% url 'register' %}">
-        {% csrf_token %}
-        <div class="container">
-            <label>First Name : </label>
-            <input type="text" placeholder="Enter Firstname" name="first_name" required>
-            <label>Last Name : </label>
-            <input type="text" placeholder="Enter Lastname" name="last_name" required>
-            <label>Email : </label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-            <label>Gender : </label>
-            <select type="text"  name="gender" required>
-                <option value="volvo">Male</option>
-                <option value="saab">Female</option>
-                <option value="mercedes">Non-binary</option>
-                <option value="audi">Prefer not to say</option>
-            </select>
-            <label>Username : </label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-            <label>Password : </label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-            <label>Confirm Password : </label>
-            <input type="password" placeholder="Confirm Password" name="confirm_password" required>
-            <button type="submit">Register</button>
-            <input type="checkbox" checked="checked"> Remember me
-            <p>Back to <a href="/first_page">first page</a></p>
-        </div>
-    </form>
-</body>
+<div class="bg-img">
+    <div class= "content">
+        <header> Register </header>
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="container">
+                <div class="field">
+                    <a1>First Name</a1>
+                    <input type="text" placeholder="Enter Firstname" name="first_name" required>
+                </div>
+                <div class="field">
+                    <a1>Last Name</a1>
+                    <input type="text" placeholder="Enter Lastname" name="last_name" required>
+                </div>
+                <div class="field">
+                    <a1>Email</a1>
+                    <input type="text" placeholder="Enter Email" name="email" required>
+                </div>
+                <div class="field">
+                    <a1>Username</a1>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+                </div>
+                <div class="field">
+                    <a1>Password</a1>
+                    <input type="password" placeholder="Enter Password" name="password" required>
+                </div>
+                <div class="field">
+                    <a1>Confirm</a1>
+                    <input type="password" placeholder="Confirm Password" name="confirm_password" required>
+                </div>
+                <div class="field">
+                    <a1>Gender</a1>
+                    <select type="text"  name="gender" required>
+                        <option value="volvo">Male</option>
+                        <option value="saab">Female</option>
+                        <option value="mercedes">Non-binary</option>
+                        <option value="audi">Prefer not to say</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <button type="submit">Register</button>
+                </div>
+                <div class="copyright">
+                    <a href="/first_page" style="text-decoration: none; color: gray">back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 </html>
