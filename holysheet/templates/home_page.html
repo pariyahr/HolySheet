@@ -1,10 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="{% static 'home_page.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
 </head>
-<body>
+<div class="bg-img">
+    <div class="content">
+        <ul class="navbar">
+            <li><a class="active" href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="search-icon"><a href="#"><i class="fas fa-search"></i></a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." />
+            <button type="button">Search</button>
+        </div>
 
-</body>
+    </div>
+</div>
 </html>
+
+<script>
+    document.querySelector('.search-icon').addEventListener('click', function() {
+      var searchbar = document.querySelector('.search-bar');
+      if (searchbar.style.display === 'none' || searchbar.style.display === '') {
+        searchbar.style.display = 'block';
+        searchbar.style.active= true;
+      } else {
+        searchbar.style.active= false;
+        searchbar.style.display = 'none';
+      }
+    });
+</script>
