@@ -27,9 +27,7 @@ class Customer(models.Model):
     email = models.EmailField(_('Customer Email'), unique=True, max_length=100)
 
     def __str__(self):
-        return (f'Customer Full Name: {self.first_name} {self.last_name}, '
-                f'Customer Contact number: {self.contact_number} ,Customer Gender: {self.gender},'
-                f' Customer Assets To Purchase: {self.assets}, Customer Email: {self.email}')
+        return f' {self.first_name} {self.last_name}'
 
 
 class Seller(models.Model):
@@ -42,9 +40,7 @@ class Seller(models.Model):
     email = models.EmailField(_('Seller Email'), unique=True, max_length=100)
 
     def __str__(self):
-        return (f'Seller Full Name: {self.first_name} {self.last_name}, '
-                f'Seller Contact number: {self.contact_number} ,Seller Gender: {self.gender},'
-                f'Seller Email: {self.email}')
+        return f'Seller Full Name: {self.first_name} {self.last_name}'
 
 
 class Preview(models.Model):

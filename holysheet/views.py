@@ -41,11 +41,11 @@ def register(request):
         password = request.POST.get('password')
         confirm_password = request.POST.get('password')
         email = request.POST.get('email')
+        number = request.POST.get('phone_number')
         user = Customer.objects.create(username=username, password=password, email=email, first_name=firstname,
-                                       last_name=lastname, gender=gender)
+                                       last_name=lastname, gender=gender, contact_number=number)
 
-        # Perform any additional actions (e.g., login the user automatically)
-        return redirect('login')  # Redirect to the login page after successful registration
+        return redirect('login')
 
     return render(request, 'register.html')
 
