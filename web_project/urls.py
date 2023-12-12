@@ -22,3 +22,4 @@ urlpatterns = [
     path('', include('holysheet.urls')),
     path('admin/', admin.site.urls),
 ]
+

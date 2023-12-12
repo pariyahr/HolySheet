@@ -4,6 +4,10 @@ from django.template import loader
 from .models import Customer
 from django.contrib import messages
 from django.utils.translation import get_language
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import viewsets
+from .serializers import CustomerSerializer
 
 
 # Create your views here.
@@ -68,3 +72,24 @@ def register(request):
 def home(request):
     template = loader.get_template('home_page.html')
     return HttpResponse(template.render())
+
+
+@api_view(['GET'])
+def getData(request):
+    return Response()
+
+class customerViewSet(viewsets.ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+
+
+
+
+
+
+
+
+
+
+
