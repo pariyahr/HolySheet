@@ -7,7 +7,7 @@ from django.utils.translation import get_language
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import viewsets
-from .serializers import CustomerSerializer
+from .serializers import *
 
 
 # Create your views here.
@@ -82,7 +82,9 @@ class customerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
-
+class sellerViewSet(viewsets.ModelViewSet):
+    queryset = Seller.objects.all()
+    serializer_class = SellerSerializer
 
 
 

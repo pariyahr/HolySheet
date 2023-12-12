@@ -1,10 +1,11 @@
 from . import views
 from django.urls import include, path
 from rest_framework import routers
-from .views import customerViewSet
+from .views import *
 
 router = routers.DefaultRouter()
 router.register(r'customer', customerViewSet)
+router.register(r'seller', sellerViewSet)
 
 urlpatterns = [
     path('first_page/', views.first_page, name='first_page'),
