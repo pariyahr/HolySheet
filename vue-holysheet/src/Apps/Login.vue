@@ -1,0 +1,48 @@
+<template>
+  <head>
+    <meta charset="UTF-8">
+    <title>login page</title>
+  </head>
+  <div class="bg-img">
+      <div class="content">
+          <header> Login </header>
+          <form method="POST" action="{% url 'login' %}">
+<!--              {% csrf_token %}-->
+              <div class="container">
+                  <div class="field">
+                      <a1>Username</a1>
+                      <input type="text" placeholder="Enter Username" name="username" required>
+                  </div>
+                  <div class="field">
+                      <a1>Password</a1>
+                      <input type="password" placeholder="Enter Password" name="password" required>
+                  </div>
+                  <div class="field">
+                      <button type="submit">Login</button>
+                  </div>
+
+                  <p>Forgot <a href="#">password?</a></p>
+                  <div class="copyright">
+                      <a href="/first_page" style="text-decoration: none; color: gray">back</a>
+                  </div>
+              </div>
+<!--              {% if messages %}-->
+<!--                  {% for message in messages %}-->
+<!--                      {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}-->
+<!--                  {% endfor %}-->
+<!--              {% endif %}-->
+
+          </form>
+      </div>
+  </div>
+</template>
+
+<script>
+export default {
+    name: "Login_page"
+}
+</script>
+
+<style scoped src="../assets/css/first_page.css">
+
+</style>

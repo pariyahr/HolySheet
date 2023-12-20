@@ -42,30 +42,6 @@ def login(request):
 
 
 def register(request):
-    if request.method == 'POST':
-        firstname = request.POST.get('username')
-        lastname = request.POST.get('username')
-        gender = request.POST.get('username')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('password')
-        email = request.POST.get('email')
-        number = request.POST.get('phone_number')
-
-        try:
-            customer = Customer.objects.get(username=username)
-            messages.info(request, 'Username is taken')
-        except:
-            if len(password) < 8:
-                messages.info(request, 'Password is weak')
-            elif number[0] != '0' or number[1] != '9' or len(number) != 11:
-                messages.info(request, 'phone number format is wrong')
-            else:
-                user = Customer.objects.create(username=username, password=password, email=email, first_name=firstname,
-                                               last_name=lastname, gender=gender, contact_number=number)
-                messages.info(request, 'User registered successfully')
-                return redirect('login')
-
     return render(request, 'register.html')
 
 
