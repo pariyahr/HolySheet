@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from .models import Customer
 from django.contrib import messages
@@ -42,7 +42,8 @@ def login(request):
 
 
 def register(request):
-    return render(request, 'register.html')
+    print("koskhole khar")
+    return JsonResponse({'message' : 'Registration successful'})
 
 
 def home(request):

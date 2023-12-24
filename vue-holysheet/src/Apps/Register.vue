@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <title>Register</title>
 </head>
+
 <div class="bg-img">
     <div class= "content">
         <header> Register </header>
-        <form method="POST">
+
+
+        <form @submit="handleSubmit" method="POST" >
+
 <!--            {% csrf_token %}-->
             <div class="container">
                 <div class="field">
@@ -48,7 +52,7 @@
                     </select>
                 </div>
                 <div class="field">
-                    <button type="submit" @click="redirectToLogin">Register</button>
+                    <button type="submit">Register</button>
                 </div>
                 <div class="copyright">
                     <a href="/first_page" style="text-decoration: none; color: gray">back</a>
@@ -67,18 +71,53 @@
 <script>
 
 import router from "@/router";
+import axios from "axios";
 
+window.csrf_token = "{{ csrf_token() }}"
 export default {
     name: "Register_page",
 
-    methods: {
+    data() {
+        return {
+            csrfToken: null
+        }
+    },
 
+
+    methods: {
         redirectToLogin() {
-            router.push('/login');
+            // Code for redirecting to the login page
+        },
+
+        handleSubmit(event) {
+            event.preventDefault();
+
+            // Retrieve form data
+            const formData = new FormData(event.target);
+
+            // Set CSRF token in form data
+
+            // Send a POST request to the Django backend
+            axios.defaults.headers.common = {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': window.csrf_token
+            };
+            axios.post('/register/', formData, {
+                xsrfCookieName: 'csrftoken',
+                xsrfHeaderName: 'X-CSRFTOKEN',
+            })
+                .then(response => {
+                    // Handle success response
+                    console.log(response.data.message);
+                    router.push('/login');
+                })
+                .catch(error => {
+                    // Handle error response
+                    console.error(error);
+                });
         }
     }
 }
-
 
 
 
