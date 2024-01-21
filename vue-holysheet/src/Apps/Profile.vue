@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Profile</title>
 </head>
 <div class="bg-img">
     <div class="content">
@@ -28,6 +28,39 @@
 <!--                {% endfor %}-->
 <!--            {% endif %}-->
     </div>
+
+    <div class="profile-page">
+    <div class="profile-header">
+      <img class="profile-picture" src="path/to/profile-picture.jpg" alt="Profile Picture" />
+      <div class="profile-details">
+        <!-- Profile details like username, bio, etc. -->
+      </div>
+      <div class="profile-actions">
+        <!-- Follow/Unfollow button, Edit Profile, etc. -->
+      </div>
+    </div>
+
+    <div class="profile-content">
+      <div class="profile-stats">
+        <div class="followers">
+          <span class="stat-number">500</span>
+          <span class="stat-label">Followers</span>
+        </div>
+        <div class="followings">
+          <span class="stat-number">200</span>
+          <span class="stat-label">Followings</span>
+        </div>
+      </div>
+
+      <!-- Other content specific to the profile, posts, etc. -->
+
+    </div>
+
+    <div class="options-menu">
+      <!-- Three-dot menu content -->
+    </div>
+  </div>
+
 </div>
 </html>
 </template>
@@ -35,7 +68,7 @@
 <script>
 
 export default {
-    name: "Home_page",
+    name: "Profile_page",
 }
 </script>
 

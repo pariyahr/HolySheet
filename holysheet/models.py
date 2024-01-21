@@ -25,6 +25,9 @@ class Customer(models.Model):
     gender = models.CharField(_('Customer Gender'), max_length=100, default='0000000')
     assets = models.IntegerField(_('Customer Assets To Purchase'), default='0000000')
     email = models.EmailField(_('Customer Email'), unique=True, max_length=100)
+    profile_picture = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    followers_num = models.IntegerField(_('followers'), max_length=100, default=0)
+    followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
 
     def __str__(self):
         return f' {self.first_name} {self.last_name}'
@@ -38,6 +41,9 @@ class Seller(models.Model):
     gender = models.CharField(_('Seller Gender'), max_length=100, default='0000000')
     contact_number = models.CharField(_('Seller Contact number'), unique=True, max_length=12)
     email = models.EmailField(_('Seller Email'), unique=True, max_length=100)
+    profile_picture = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    followers_num = models.IntegerField(_('followers'), max_length=100, default=0)
+    followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
 
     def __str__(self):
         return f'Seller Full Name: {self.first_name} {self.last_name}'

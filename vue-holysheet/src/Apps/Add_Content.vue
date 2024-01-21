@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Add</title>
 </head>
 <div class="bg-img">
     <div class="content">
@@ -35,7 +35,7 @@
 <script>
 
 export default {
-    name: "Home_page",
+    name: "Add_page",
 }
 </script>
 

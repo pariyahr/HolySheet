@@ -71,7 +71,9 @@ export default {
                 .catch(error => {
                     // Handle error response
                     console.error(error);
+                    router.push('/home');
                 });
+
         }
     }
 }
