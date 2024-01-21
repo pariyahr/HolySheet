@@ -66,7 +66,7 @@ export default {
                 .then(response => {
                     // Handle success response
                     console.log(response.data.message);
-                    router.push('/home_page');
+                    router.push('/home');
                 })
                 .catch(error => {
                     // Handle error response
