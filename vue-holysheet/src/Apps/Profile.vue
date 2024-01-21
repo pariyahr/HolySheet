@@ -25,47 +25,38 @@
                 <RouterLink to="/Menu"> ... </RouterLink>
             </div></li>
         </ul>
-        <div class="profile-page">
+   <div class="container">
 
     <div class="profile-header">
       <img class="profile-picture" src="../assets/profile-icon.jpg" alt="Profile Picture" />
-      <div class="followers">
-          <span class="stat-number">500</span>
-          <span class="stat-label">Followers</span>
-        </div>
-        <div class="followings">
-          <span class="stat-number">200</span>
-          <span class="stat-label">Followings</span>
-        </div>
-      <div class="profile-details">
-        <!-- Profile details like username, bio, etc. -->
-      </div>
-      <div class="profile-actions">
-        <!-- Follow/Unfollow button, Edit Profile, etc. -->
-      </div>
     </div>
-    <div class="profile-content">
-      <div class="profile-stats">
-
-      </div>
-
-
-      <!-- Other content specific to the profile, posts, etc. -->
-
+    <div class="inner_content" style ="margin-bottom: 10px">
+        <li class="posts" style="list-style: none;">
+          <div class="stat-number">500</div>
+          <div class="stat-label">Posts</div>
+        </li>
+        <li class="followers" style="list-style: none;">
+          <div class="stat-number">500</div>
+          <div class="stat-label">Followers</div>
+        </li>
+        <li class="followings" style="list-style: none;">
+          <div class="stat-number">200</div>
+          <div class="stat-label">Followings</div>
+        </li>
     </div>
-
-    <div class="options-menu">
-      <!-- Three-dot menu content -->
+    <div class="profile-details">
+       <h1 class="username">YourUsername</h1>
     </div>
-<!--        {% if messages %}-->
-<!--                {% for message in messages %}-->
-<!--                    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}-->
-<!--                {% endfor %}-->
-<!--            {% endif %}-->
-    </div>
-
+    <ul class="navbar" style="position: absolute; top: 30%; left: 46%;">
+        <li><div class="active">
+            <a> edit profile </a>
+        </div></li>
+    </ul>
 
   </div>
+
+
+</div>
 
 </div>
 </html>
@@ -76,6 +67,12 @@
 export default {
     name: "Profile_page",
 }
+
+//function editProfile() {
+    // Add functionality for editing profile
+//    alert("Edit profile clicked!");
+//}
+
 </script>
 
 <style scoped src="../assets/css/home_page.css">

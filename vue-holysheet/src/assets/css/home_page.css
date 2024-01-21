@@ -40,8 +40,6 @@
   width: 100%;
   display: flex;
   margin-bottom: 10px;
-
-
 }
 
 ul.navbar {
@@ -198,6 +196,7 @@ ul.navbar li a:hover{
   justify-content: space-between;
   width: 100%;
   margin-bottom: 20px;
+  vertical-align: text-top;
 }
 
 .profile-picture {
@@ -229,21 +228,23 @@ ul.navbar li a:hover{
   display: flex;
 }
 
-.followers{
+.posts{
   margin-right: 20px;
-  padding-left: 300px;
+  padding-bottom: 25px;
+  padding-left: 60px;
 }
-.followings {
+.followers, .followings {
   margin-right: 20px;
+  padding-bottom: 25px;
 }
 
 .stat-number {
-  font-size: 40px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .stat-label {
-  font-size: 34px;
+  font-size: 14px;
   color: gray;
 }
 
@@ -263,3 +264,42 @@ ul.navbar li a:hover{
  float: left;
    margin: 0 0 0 15px;
  }
+
+ .edit-profile-icon {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+ .username {
+   font-size: 1.5em;
+   text-align-all: left;
+   position: absolute;
+  top: 65%;
+  left: 13%;
+}
+
+.bio {
+    color: gray;
+    margin: 5px 0;
+}
+
+.inner_content {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  text-align: center;
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+  width: 370px;
+  box-shadow: 0 0 10px 0;
+  /*backdrop-filter: blur(50px);*/
+  border-radius: 30px;
+  align-items: center;
+  vertical-align: center;
+  background-color: white;
+}
