@@ -21,28 +21,15 @@
             <li><div class="active">
                 <RouterLink to="/Profile"> Profile </RouterLink>
             </div></li>
+            <li><div class="active">
+                <RouterLink to="/Menu"> ... </RouterLink>
+            </div></li>
         </ul>
-<!--        {% if messages %}-->
-<!--                {% for message in messages %}-->
-<!--                    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}-->
-<!--                {% endfor %}-->
-<!--            {% endif %}-->
-    </div>
+        <div class="profile-page">
 
-    <div class="profile-page">
     <div class="profile-header">
-      <img class="profile-picture" src="path/to/profile-picture.jpg" alt="Profile Picture" />
-      <div class="profile-details">
-        <!-- Profile details like username, bio, etc. -->
-      </div>
-      <div class="profile-actions">
-        <!-- Follow/Unfollow button, Edit Profile, etc. -->
-      </div>
-    </div>
-
-    <div class="profile-content">
-      <div class="profile-stats">
-        <div class="followers">
+      <img class="profile-picture" src="../assets/profile-icon.jpg" alt="Profile Picture" />
+      <div class="followers">
           <span class="stat-number">500</span>
           <span class="stat-label">Followers</span>
         </div>
@@ -50,7 +37,18 @@
           <span class="stat-number">200</span>
           <span class="stat-label">Followings</span>
         </div>
+      <div class="profile-details">
+        <!-- Profile details like username, bio, etc. -->
       </div>
+      <div class="profile-actions">
+        <!-- Follow/Unfollow button, Edit Profile, etc. -->
+      </div>
+    </div>
+    <div class="profile-content">
+      <div class="profile-stats">
+
+      </div>
+
 
       <!-- Other content specific to the profile, posts, etc. -->
 
@@ -59,6 +57,14 @@
     <div class="options-menu">
       <!-- Three-dot menu content -->
     </div>
+<!--        {% if messages %}-->
+<!--                {% for message in messages %}-->
+<!--                    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}-->
+<!--                {% endfor %}-->
+<!--            {% endif %}-->
+    </div>
+
+
   </div>
 
 </div>
