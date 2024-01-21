@@ -20,17 +20,27 @@ def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
+        user = None
         try:
             customer = Customer.objects.get(username=username)
+            user = customer
+        except Customer.DoesNotExist:
+            try:
+                seller = Seller.objects.get(username=username)
+                user = seller
+            except Seller.DoesNotExist:
+                print("poop")
+                return JsonResponse({'message': 'User does not exist'}, status=401)
 
-            if customer.password == password:
-                return JsonResponse({'message': 'login successful'}, status=200)
+        if user is not None:
+
+            if user.password == password:
+                return JsonResponse({'message': 'Login successful'}, status=200)
             else:
                 return JsonResponse({'message': 'Wrong username or password'}, status=401)
-        except Customer.DoesNotExist:
+        else:
             return JsonResponse({'message': 'User does not exist'}, status=401)
-
+    print("hello")
     return JsonResponse({'message': 'Invalid request'}, status=400)
 
 
@@ -44,21 +54,33 @@ def register(request):
         confirm_password = request.POST.get('confirm_password')
         phone_number = request.POST.get('phone_number')
         gender = request.POST.get('gender')
-
+        print(request.POST.get('seller'))
+        is_seller = request.POST.get('seller') == 'on'
         if (
             first_name and last_name and email and username and password and
             confirm_password and phone_number and gender
         ):
             if password == confirm_password:
-                customer = Customer.objects.create(
-                    first_name=first_name,
-                    last_name=last_name,
-                    email=email,
-                    username=username,
-                    password=password,
-                    contact_number=phone_number,
-                    gender=gender
-                )
+                if not is_seller:
+                    customer = Customer.objects.create(
+                        first_name=first_name,
+                        last_name=last_name,
+                        email=email,
+                        username=username,
+                        password=password,
+                        contact_number=phone_number,
+                        gender=gender
+                    )
+                else:
+                    seller = Seller.objects.create(
+                        first_name=first_name,
+                        last_name=last_name,
+                        email=email,
+                        username=username,
+                        password=password,
+                        contact_number=phone_number,
+                        gender=gender
+                    )
                 return JsonResponse({'message': 'Registration successful'}, status=201)
             else:
 

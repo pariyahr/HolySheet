@@ -43,6 +43,7 @@
                         <a1>Phone Number</a1>
                         <input type="number" placeholder="ex. 09121234567" name="phone_number" required>
                     </div>
+
                     <div class="field">
                         <a1>Gender</a1>
                         <select type="text"  name="gender" required>
@@ -51,6 +52,10 @@
                             <option value="non-binary">Non-binary</option>
                             <option value="pns">Prefer not to say</option>
                         </select>
+                    </div>
+                    <div class ="field">
+                        <a1>Seller</a1>
+                        <input type="checkbox" style="width: 25px" name="seller" id="seller">
                     </div>
                     <div class="field">
                         <button type="submit">Register</button>
