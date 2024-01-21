@@ -55,11 +55,7 @@
                 <div class="copyright">
                     <a href="/first_page" style="text-decoration: none; color: gray">back</a>
                 </div>
-                {% if messages %}
-                {% for message in messages %}
-                    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
-                {% endfor %}
-            {% endif %}
+
             </div>
         </form>
     </div>

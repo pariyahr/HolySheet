@@ -24,14 +24,17 @@ def login(request):
 
         # Check if the username exists in the database
         try:
+
             customer = Customer.objects.get(username=username)
+
             if customer.password == password:
-                messages.info(request, 'Successfully logged in')
+                #messages.info(request, 'Successfully logged in')
                 print("hoora")
                 return JsonResponse({'message': 'login successful'})
 
             else:
                 messages.info(request, 'Wrong username of password')
+                return TypeError
         except Customer.DoesNotExist:
             # Handle the case where the username doesn't exist
             # You can add appropriate error handling or redirect the user to an error page
