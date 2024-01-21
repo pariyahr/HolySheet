@@ -184,3 +184,80 @@ ul.navbar li a:hover{
   margin: 0 auto;
   box-shadow: 0 0 30px 0;
 }
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 400px; /* Adjust as needed */
+  height: 400px; /* Adjust as needed */
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+  margin-left: 100px;
+}
+
+.profile-details {
+  flex: 1;
+}
+
+.profile-actions {
+  /* Add styles for follow/unfollow button, edit profile, etc. */
+}
+
+.profile-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profile-stats {
+  display: flex;
+}
+
+.followers{
+  margin-right: 20px;
+  padding-left: 300px;
+}
+.followings {
+  margin-right: 20px;
+}
+
+.stat-number {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 34px;
+  color: gray;
+}
+
+.menu-icon {
+  width: 60px; /* Adjust as needed */
+  height: 60px; /* Adjust as needed */
+}
+
+.options-menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  /* Add styles for the three-dot menu, like icon, dropdown, etc. */
+}
+ #left {
+ float: left;
+   margin: 0 0 0 15px;
+ }
