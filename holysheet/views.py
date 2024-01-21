@@ -18,42 +18,59 @@ def first_page(request):
 
 def login(request):
     if request.method == 'POST':
-        print("pif pif")
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # Check if the username exists in the database
         try:
-
             customer = Customer.objects.get(username=username)
 
             if customer.password == password:
-                #messages.info(request, 'Successfully logged in')
-                print("hoora")
-                return JsonResponse({'message': 'login successful'})
-
+                return JsonResponse({'message': 'login successful'}, status=200)
             else:
-                messages.info(request, 'Wrong username of password')
-                return TypeError
+                return JsonResponse({'message': 'Wrong username or password'}, status=401)
         except Customer.DoesNotExist:
-            # Handle the case where the username doesn't exist
-            # You can add appropriate error handling or redirect the user to an error page
-            return JsonResponse({'message': 'login not successful'})
+            return JsonResponse({'message': 'User does not exist'}, status=401)
 
-        # Perform any additional authentication logic here (e.g., comparing passwords)
-
-        # If the authentication is successful, you can redirect the user to a success page
-
-    return JsonResponse({'message': 'poop'})
+    return JsonResponse({'message': 'Invalid request'}, status=400)
 
 
 def register(request):
-    print("koskhole khar")
-    return JsonResponse({'message' : 'Registration successful'})
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        phone_number = request.POST.get('phone_number')
+        gender = request.POST.get('gender')
+
+        if (
+            first_name and last_name and email and username and password and
+            confirm_password and phone_number and gender
+        ):
+            if password == confirm_password:
+                customer = Customer.objects.create(
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    username=username,
+                    password=password,
+                    contact_number=phone_number,
+                    gender=gender
+                )
+                return JsonResponse({'message': 'Registration successful'}, status=201)
+            else:
+
+                return JsonResponse({'message': 'Password and confirm password do not match'}, status=401)
+        else:
+            return JsonResponse({'message': 'Missing required fields'}, status=402)
+
+    return JsonResponse({'message': 'Invalid request'}, status=400)
 
 
 def home(request):
-    print("home ")
+    print("home")
     return JsonResponse({'message': 'in home page'})
 
 

@@ -3,19 +3,21 @@
 
 
   <div class="bg-img">
-    <div class="content">
-        <header>Holy Sheet</header>
+      <div class = "stacked-content">
+        <div class="content">
+            <header>Holy Sheet</header>
 
-        <div class="field">
-            <RouterLink to="/login"> Login </RouterLink>
+            <div class="field">
+                <RouterLink to="/login"> Login </RouterLink>
+            </div>
+            <div class="field">
+                <RouterLink to="/register"> Register </RouterLink>
+            </div>
+            <div class="copyright">
+                <a> © alireza amiri, pariya hajipour, amirreza ghadyani</a>
+            </div>
         </div>
-        <div class="field">
-            <RouterLink to="/register"> Register </RouterLink>
-        </div>
-        <div class="copyright">
-            <a> © alireza amiri, pariya hajipour, amirreza ghadyani</a>
-        </div>
-    </div>
+      </div>
 </div>
   <RouterView/>
 </template>
