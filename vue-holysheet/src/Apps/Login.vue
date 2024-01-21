@@ -6,7 +6,7 @@
   <div class="bg-img">
       <div class="content">
           <header> Login </header>
-          <form method="POST" action="{% url 'login' %}">
+          <form @submit="handleSubmit" method="POST" >
 <!--              {% csrf_token %}-->
               <div class="container">
                   <div class="field">
@@ -23,7 +23,7 @@
 
                   <p>Forgot <a href="#">password?</a></p>
                   <div class="copyright">
-                      <a href="/first_page" style="text-decoration: none; color: gray">back</a>
+                      <a> <RouterLink to="/first_page"> back </RouterLink></a>
                   </div>
               </div>
 <!--              {% if messages %}-->
@@ -38,11 +38,48 @@
 </template>
 
 <script>
+import axios from "axios";
+import router from "@/router";
+import {RouterLink} from "vue-router";
+
 export default {
-    name: "Login_page"
+    name: "Login_page",
+    components: {RouterLink},
+    methods:{
+        handleSubmit(event) {
+            event.preventDefault();
+
+            // Retrieve form data
+            const formData = new FormData(event.target);
+
+            // Set CSRF token in form data
+
+            // Send a POST request to the Django backend
+            axios.defaults.headers.common = {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': window.csrf_token
+            };
+            axios.post('/login/', formData, {
+                xsrfCookieName: 'csrftoken',
+                xsrfHeaderName: 'X-CSRFTOKEN',
+            })
+                .then(response => {
+                    // Handle success response
+                    console.log(response.data.message);
+                    router.push('/home_page');
+                })
+                .catch(error => {
+                    // Handle error response
+                    console.error(error);
+                    router.push('/home');
+                });
+
+        }
+    }
 }
 </script>
 
 <style scoped src="../assets/css/first_page.css">
+
 
 </style>

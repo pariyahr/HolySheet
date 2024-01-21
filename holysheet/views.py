@@ -18,6 +18,7 @@ def first_page(request):
 
 def login(request):
     if request.method == 'POST':
+        print("pif pif")
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -26,19 +27,21 @@ def login(request):
             customer = Customer.objects.get(username=username)
             if customer.password == password:
                 messages.info(request, 'Successfully logged in')
-                return redirect('home_page')
+                print("hoora")
+                return JsonResponse({'message': 'login successful'})
+
             else:
                 messages.info(request, 'Wrong username of password')
         except Customer.DoesNotExist:
             # Handle the case where the username doesn't exist
             # You can add appropriate error handling or redirect the user to an error page
-            return redirect('login')
+            return JsonResponse({'message': 'login not successful'})
 
         # Perform any additional authentication logic here (e.g., comparing passwords)
 
         # If the authentication is successful, you can redirect the user to a success page
 
-    return render(request, 'login.html')
+    return JsonResponse({'message': 'poop'})
 
 
 def register(request):
@@ -47,8 +50,8 @@ def register(request):
 
 
 def home(request):
-    template = loader.get_template('home_page.html')
-    return HttpResponse(template.render())
+    print("home ")
+    return JsonResponse({'message': 'in home page'})
 
 
 @api_view(['GET'])

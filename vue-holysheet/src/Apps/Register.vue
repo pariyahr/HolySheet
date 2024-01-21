@@ -55,7 +55,7 @@
                     <button type="submit">Register</button>
                 </div>
                 <div class="copyright">
-                    <a href="/first_page" style="text-decoration: none; color: gray">back</a>
+                    <RouterLink to="/first_page"> back </RouterLink>
                 </div>
 <!--                {% if messages %}-->
 <!--                {% for message in messages %}-->
@@ -72,10 +72,12 @@
 
 import router from "@/router";
 import axios from "axios";
+import {RouterLink} from "vue-router";
 
 window.csrf_token = "{{ csrf_token() }}"
 export default {
     name: "Register_page",
+    components: {RouterLink},
 
     data() {
         return {
