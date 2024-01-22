@@ -25,7 +25,6 @@
                 <RouterLink to="/Menu"> ... </RouterLink>
             </div></li>
         </ul>
-   <div class="container">
 
     <div class="profile-header">
       <img class="profile-picture" src="../assets/profile-icon.jpg" alt="Profile Picture" />
@@ -47,13 +46,27 @@
     <div class="profile-details">
        <h1 class="username">YourUsername</h1>
     </div>
-    <ul class="navbar" style="position: absolute; top: 30%; left: 46%;">
-        <li><div class="active">
-            <a> edit profile </a>
-        </div></li>
-    </ul>
-
-  </div>
+    <div class="container" style="position: absolute; top: 31%; left: 46%;">
+        <div class="field" style="width: 150px;">
+            <button v-on:click="vis" type="submit">edit profile</button>
+        </div>
+    </div>
+    <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 41%;">
+        <div class="field">
+            <a1>Username</a1>
+            <input type="text" placeholder="Enter Username" name="username">
+        </div>
+        <div class="field">
+            <a1>Password</a1>
+            <input type="password" placeholder="Enter Password" name="password">
+        </div>
+        <div class="field" style="width: 300px;">
+            <a>Profile Picture</a>
+        </div>
+        <div class="field">
+            <button type="submit">Submit</button>
+        </div>
+    </div>
 
 
 </div>
@@ -66,12 +79,17 @@
 
 export default {
     name: "Profile_page",
+    data() {
+      return {
+        visib: "",
+      };
+    },
+    methods:{
+        vis(){
+            this.visib = "n";
+        }
+    }
 }
-
-//function editProfile() {
-    // Add functionality for editing profile
-//    alert("Edit profile clicked!");
-//}
 
 </script>
 
