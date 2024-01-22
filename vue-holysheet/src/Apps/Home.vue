@@ -22,11 +22,17 @@
                 <RouterLink to="/Profile"> Profile </RouterLink>
             </div></li>
         </ul>
-<!--        {% if messages %}-->
-<!--                {% for message in messages %}-->
-<!--                    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}-->
-<!--                {% endfor %}-->
-<!--            {% endif %}-->
+
+        <div class="container" style="position: absolute; top: 15%; left: 25%;">
+            <div class="field" style="width: 150px;">
+                <a1>Trending</a1>
+            </div>
+        </div>
+        <div class="container" style="position: absolute; top: 15%; left: 65%;">
+            <div class="field" style="width: 150px;">
+                <a1>For You</a1>
+            </div>
+        </div>
     </div>
 </div>
 </html>

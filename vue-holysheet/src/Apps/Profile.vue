@@ -51,7 +51,7 @@
             <button v-on:click="vis" type="submit">edit profile</button>
         </div>
     </div>
-    <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 41%;">
+    <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 41.5%;">
         <div class="field">
             <a1>Username</a1>
             <input type="text" placeholder="Enter Username" name="username">
