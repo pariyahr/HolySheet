@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from .models import Customer
+from .models import Seller
 from django.contrib import messages
 from django.utils.translation import get_language
 from rest_framework.response import Response
@@ -108,7 +109,15 @@ class sellerViewSet(viewsets.ModelViewSet):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
 
+def component_list(request):
+    customers = Seller.objects.all()
+    data = [{'username': customer.username, 'followers': customer.followers_num, 'followings': customer.followings_num} for customer in customers]
+    return JsonResponse(data, safe=False)
 
+def component_detail(request, component_id):
+    customer = get_object_or_404(Seller, pk=component_id)
+    data = {'username': customer.username, 'followers': customer.followers_num, 'followings': customer.followings_num}
+    return JsonResponse(data)
 
 
 
