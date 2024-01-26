@@ -9,6 +9,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import viewsets
 from .serializers import *
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views import View
 
 
 # Create your views here.
@@ -114,12 +117,26 @@ def component_list(request):
     data = [{'username': customer.username, 'followers': customer.followers_num, 'followings': customer.followings_num} for customer in customers]
     return JsonResponse(data, safe=False)
 
-def component_detail(request, component_id):
-    customer = get_object_or_404(Seller, pk=component_id)
-    data = {'username': customer.username, 'followers': customer.followers_num, 'followings': customer.followings_num}
-    return JsonResponse(data)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class ComponentDetailView(View):
+    def get(self, request, component_id):
+        customer = get_object_or_404(Seller, pk=component_id)
+        data = {'username': customer.username, 'followers': customer.followers_num,
+                'followings': customer.followings_num}
+        return JsonResponse(data)
+    def put(self, request, component_id):
+        component = get_object_or_404(Seller, pk=component_id)
+
+        data = json.loads(request.body.decode('utf-8'))
+
+        component.username = data.get('username', component.username)
+        component.password = data.get('password', component.password)
+
+        component.save()
+
+        return JsonResponse({'message': 'Component updated successfully'})
 
 
 

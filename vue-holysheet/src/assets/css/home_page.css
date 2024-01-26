@@ -67,6 +67,16 @@
   margin-bottom: 10px;
 }
 
+.field1{
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 45px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+}
+
 .field span{
   width: 40px;
   line-height: 45px;
@@ -86,6 +96,24 @@
   font-size: 16px;
   font-family: 'Poppins',sans-serif;
   transition: box-shadow 0.3s ease;
+}
+
+.field1 a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  justify-content: center;
+  text-align: center;
+  color :white;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+
+  border-radius: 30px;
+  font-size: 16px;
+  font-family: 'Poppins',sans-serif;
+  transition: box-shadow 0.3s ease;
+
 }
 
 .field a:hover{
@@ -115,6 +143,22 @@
   color :white;
   height: 100%;
   width: 100%;
+  background-color: black;
+  border-radius: 30px;
+  font-size: 16px;
+  font-family: 'Poppins',sans-serif;
+  margin-right: 20px;
+}
+
+.field1 a1{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  justify-content: center;
+  text-align: center;
+  color :white;
+  height: 100%;
+  width: 67%;
   background-color: black;
   border-radius: 30px;
   font-size: 16px;

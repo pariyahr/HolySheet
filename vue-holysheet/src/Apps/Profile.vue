@@ -22,7 +22,10 @@
                 <RouterLink to="/Profile"> Profile </RouterLink>
             </div></li>
             <li><div class="active">
-                <RouterLink to="/Menu"> ... </RouterLink>
+                <RouterLink to="/Menu"> Saved </RouterLink>
+            </div></li>
+            <li><div class="active">
+                <RouterLink to="/Menu"> Settings </RouterLink>
             </div></li>
         </ul>
 
@@ -51,7 +54,7 @@
             <button v-on:click="vis" type="submit">edit profile</button>
         </div>
     </div>
-    <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 41.5%;">
+    <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 39.5%;">
         <div class="field">
             <a1>Username</a1>
             <input type="text" placeholder="Enter Username" name="username">
@@ -60,8 +63,9 @@
             <a1>Password</a1>
             <input type="password" placeholder="Enter Password" name="password">
         </div>
-        <div class="field" style="width: 300px;">
-            <a>Profile Picture</a>
+        <div class="field1">
+            <a1>Profile Picture</a1>
+            <input type="file" id="myfile" name="myfile">
         </div>
         <div class="field">
             <button type="submit">Submit</button>
