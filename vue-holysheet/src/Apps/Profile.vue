@@ -49,12 +49,12 @@
     <div class="profile-details">
        <h1 class="username">{{component.username}}</h1>
     </div>
-    <div class="container" style="position: absolute; top: 31%; left: 46%;">
+    <div class="container" style="position: absolute; top: 31%; left: 45.7%;">
         <div class="field" style="width: 150px;">
             <button v-on:click="vis" type="submit">edit profile</button>
         </div>
     </div>
-    <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 39.5%;">
+    <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 38.9%;">
         <div class="field">
             <a1>Username</a1>
             <input type="text" placeholder="Enter Username" name="username">

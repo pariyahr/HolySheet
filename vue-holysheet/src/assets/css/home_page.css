@@ -142,7 +142,7 @@
   text-align: center;
   color :white;
   height: 100%;
-  width: 100%;
+  width: 102%;
   background-color: black;
   border-radius: 30px;
   font-size: 16px;
@@ -158,7 +158,7 @@
   text-align: center;
   color :white;
   height: 100%;
-  width: 67%;
+  width: 66.5%;
   background-color: black;
   border-radius: 30px;
   font-size: 16px;
@@ -448,7 +448,7 @@ ul.navbar li a:hover{
 .posts{
   margin-right: 30px;
   padding-bottom: 25px;
-  padding-left: 60px;
+  padding-left: 55px;
 }
 .followers, .followings {
   margin-right: 20px;
