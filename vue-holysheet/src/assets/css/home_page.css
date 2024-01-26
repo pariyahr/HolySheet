@@ -293,6 +293,18 @@ ul.navbar li a {
   transition: box-shadow 0.3s ease;
 }
 
+ul.navbar li button {
+  display: inline-block; /* Change float: left to display: inline-block */
+  background-color: transparent;
+  border-radius: 30px;
+  margin-right: 10px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  backdrop-filter: blur(50px);
+  align-items: center;
+  width: 120%;
+}
+
     /* Styling for the active link */
 ul.navbar li a.active {
 
@@ -520,3 +532,28 @@ ul.navbar li a:hover{
   vertical-align: center;
   background-color: white;
 }
+
+/* Style for the scrollable scope */
+.scroll-scope {
+  height: 400px; /* Set the height of the scroll scope */
+  overflow: auto; /* Enable vertical scrolling */
+  border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
+}
+
+/* Style for the scrollable content */
+.scrollable-content {
+  /* Optional: Set padding or margin for spacing */
+}
+
+/* Style for list items (or any other content within the scrollable area) */
+ul1 {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li1 {
+  border-bottom: 1px solid #ddd; /* Optional: Add a border between items for visual clarity */
+  padding: 10px;
+}
+
