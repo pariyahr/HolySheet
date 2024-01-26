@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   user-select: none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .bg-img {
@@ -40,6 +41,27 @@
   padding-left: 10px;
   box-shadow: 0 0 10px 0;
   backdrop-filter: blur(5px);
+}
+
+.content1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  text-align: center;
+  padding-top: 10px;
+  padding-right:10px;
+  padding-left: 10px;
+  box-shadow: 0 0 10px 0;
+  backdrop-filter: blur(5px);
+  display: flex; /* Enable Flexbox */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center-align horizontally */
+
+
 }
 
 .content header {
@@ -316,22 +338,40 @@ ul.navbar li a:hover{
   box-shadow:  0 5px 10px black;
 }
 
+.search-icon{
+  background: url("../search.svg") no-repeat center center;
+  background-size: initial;
+  background-repeat: no-repeat;
+}
+
 
 .search-bar {
-  display: none;
-  position: fixed;
-  top: 100px;
-  left: 25%;
-  width: 50%;
-  height: auto;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  /*position: absolute; /* Positioning relative to the parent */
+
+  width: 50%; /* Width of the search bar */
   padding: 15px;
   background-color: rgba(1, 1, 1, 0.8);
   border-radius: 30px;
   box-shadow: 0 0 10px 0;
-  z-index: 9999;
-  opacity: 0;
-  visibility: hidden;
-  animation: fade-in 0.3s ease forwards; /* Add animation */
+}
+
+.search-bar input {
+  width: 70%; /* Adjust as needed */
+  padding: 10px; /* Adjust for input field size */
+  margin-right: 10px; /* Space between input field and button */
+  border: 1px solid #ccc; /* Style for input field */
+  border-radius: 20px; /* Rounded corners for input field */
+}
+
+.search-bar button {
+  padding: 10px 15px; /* Adjust for button size */
+  border: none; /* No border for button */
+  border-radius: 20px; /* Rounded corners for button */
+  background-color: #f5f5f5; /* Background color for button */
+  cursor: pointer; /* Cursor style for button */
 }
 
 @keyframes fade-in {
@@ -535,9 +575,10 @@ ul.navbar li a:hover{
 
 /* Style for the scrollable scope */
 .scroll-scope {
-  height: 400px; /* Set the height of the scroll scope */
+  height: 500px; /* Set the height of the scroll scope */
   overflow: auto; /* Enable vertical scrolling */
   border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
+  border-radius: 30px;
 }
 
 /* Style for the scrollable content */
@@ -556,4 +597,5 @@ li1 {
   border-bottom: 1px solid #ddd; /* Optional: Add a border between items for visual clarity */
   padding: 10px;
 }
+
 
