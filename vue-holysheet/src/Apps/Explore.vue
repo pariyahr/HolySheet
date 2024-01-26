@@ -103,12 +103,15 @@ export default {
   },
   methods: {
       toggleSearchBar() {
-      this.showSearch = !this.showSearch;
-    },
+        this.showSearch = !this.showSearch;
+      },
 
-    fetchTrendingSheets() {
-      // Fetch your sheets data here
-    },
+      fetchTrendingSheets() {
+        // Fetch your sheets data here
+      },
+      searchSheets(){
+          this.showSearch = !this.showSearch;
+      }
   },
   mounted() {
     this.fetchTrendingSheets();
