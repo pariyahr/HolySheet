@@ -153,4 +153,27 @@ def handle(request):
 
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class ComponentDetailView(View):
+    def get(self, request, component_id):
+        customer = get_object_or_404(Seller, pk=component_id)
+        data = {'username': customer.username, 'followers': customer.followers_num,
+                'followings': customer.followings_num}
+        return JsonResponse(data)
+    def put(self, request, component_id):
+        component = get_object_or_404(Seller, pk=component_id)
+
+        data = json.loads(request.body.decode('utf-8'))
+
+        component.username = data.get('username', component.username)
+        component.password = data.get('password', component.password)
+
+        component.save()
+
+        return JsonResponse({'message': 'Component updated successfully'})
+
+
+
+
+
 
