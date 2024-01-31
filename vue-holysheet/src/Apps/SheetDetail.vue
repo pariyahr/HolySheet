@@ -1,0 +1,77 @@
+<template>
+  <div class="bg-img">
+    <div class="content1">
+      <ul class="navbar">
+            <li><div class="active">
+                <RouterLink to="/Home"> Home </RouterLink>
+            </div></li>
+            <li><div class="active">
+                <RouterLink to="/Explore"> Explore </RouterLink>
+            </div></li>
+            <li><div class="active">
+                <RouterLink to="/Add"> Add </RouterLink>
+            </div></li>
+            <li><div class="active">
+                <RouterLink to="/Profile"> Profile </RouterLink>
+            </div></li>
+            <li class="search-icon" @click="toggleSearchBar">
+            <a href="#"><br></a>
+            </li>
+        </ul>
+
+        <div >
+          <h1>{{ sheet.title }}</h1>
+          <!-- Display sheet details, user info, and image -->
+          <!-- Save and Follow buttons -->
+          <button @click="saveSheet">Save Sheet</button>
+          <button @click="followUser">Follow User</button>
+        </div>
+
+    </div>
+  </div>
+
+</template>
+
+<script>
+//import SheetDisplay from "@/Apps/SheetDisplay.vue";
+
+export default {
+  name: "SheetDetail",
+    //components: {SheetDisplay},
+  data() {
+    return {
+      sheet: {
+          default: () => ({
+            title: "Moonlight Sonata",
+            composer: "Ludwig van Beethoven",
+            genre: "Classical",
+            imagePath: "../assets/score_0.svg", // Example image URL
+            rating: 4.3 // Example rating
+          }),
+      },
+      // Other necessary data
+    };
+  },
+  methods: {
+    async fetchSheetDetails() {
+      // const sheetId = this.$route.params.id;
+      // // Replace the following line with your actual data fetching logic
+      // const response = await fetch('/api/sheets/' + sheetId); // Fetching from an API as an example
+      // this.sheet = await response.json();
+    },
+    saveSheet() {
+      // Implement save functionality
+    },
+    followUser() {
+      // Implement follow functionality
+    }
+  },
+  mounted() {
+    this.fetchSheetDetails();
+  }
+};
+</script>
+
+<style scoped src="../assets/css/home_page.css">
+
+</style>

@@ -24,11 +24,11 @@
       </div>
 
       <!-- Trending Sheets Section -->
-      <div class="trending-sheets" style="margin-top: 20px; width: 90%; ">
+      <div class="trending-sheets" style="margin-top: 20px; width: 90%;">
         <h2 style="margin-bottom: 10px">Trending Sheets</h2>
         <div class="scroll-scope" style="padding: 20px">
           <ul1>
-            <li1 v-for="sheet in filteredSheets" :key="sheet.id">
+            <li1 v-for="sheet in filteredSheets" :key="sheet.id" @click="goToSheetPage()">
               <sheet-display :sheet="sheet"></sheet-display>
             </li1>
           </ul1>
@@ -41,6 +41,7 @@
 
 <script>
 import SheetDisplay from './SheetDisplay.vue';
+import router from "@/router";
 
 export default {
   name: "Explore_Page",
@@ -111,7 +112,12 @@ export default {
       },
       searchSheets(){
           this.showSearch = !this.showSearch;
-      }
+      },
+      goToSheetPage() {
+        // Route to the sheet detail page with the sheet's Isheet.id
+        router.push('/sheet');
+      },
+
   },
   mounted() {
     this.fetchTrendingSheets();

@@ -5,6 +5,7 @@ import Home from "@/Apps/Home.vue"
 import Explore from "@/Apps/Explore.vue"
 import Profile from "@/Apps/Profile.vue"
 import Add from "@/Apps/Add_Content.vue"
+import SheetDetail from "@/Apps/SheetDetail.vue";
 
 const routes= [
     {
@@ -30,6 +31,10 @@ const routes= [
     {
         path: '/add',
         component: Add
+    },
+    {
+          path: '/sheet',
+          component: SheetDetail
     }
 ]
 
