@@ -22,6 +22,6 @@ urlpatterns = [
     path('api/components/', component_list, name='component-list'),
     path('api/components/<int:component_id>/', ComponentDetailView.as_view(), name='component-detail'),
     path('api/save_sheet/', views.save_sheet, name='save_sheet'),
-    path('api/post_sheet/', views.post_sheet, name='post_sheet'),
+
 
 ]

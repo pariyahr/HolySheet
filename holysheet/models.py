@@ -29,6 +29,7 @@ class Customer(models.Model):
     email = models.EmailField(_('Customer Email'), unique=True, max_length=100)
     profile_picture = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, default='../../vue-holysheet/assets/profile-icon.jpg')
     followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
+    saved_concertos = models.ManyToManyField('Concerto', related_name='saved_by_costumer', blank=True)
 
     def __str__(self):
         return f' {self.first_name} {self.last_name}'

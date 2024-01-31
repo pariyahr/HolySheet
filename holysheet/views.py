@@ -33,6 +33,8 @@ def add(request):
         composer = request.POST.get('composer')
 
         concerto = Concerto.objects.create(name=name, composer=composer, genre=genre, price=price, concerto_file=file, score=score, owner=Seller.objects.get(username=request.session.get('user_id')))
+        user = Seller.objects.get(username=request.session.get('user_id'))
+        user.posted_concertos.add(concerto)
         return JsonResponse({'message': 'submit successful'}, status=201)
 
 def login(request):
@@ -168,7 +170,11 @@ def saved_list(request):
 
 def save_sheet(request):
     data = json.loads(request.body)
-    user = Seller.objects.get(username=request.session.get('user_id'))
+    user = None
+    try:
+        user = Seller.objects.get(username=request.session.get('user_id'))
+    except Seller.DoesNotExist:
+        user = Customer.objects.get(username=request.session.get('user_id'))
     sheet_id = data.get('sheetId')
     try:
         concerto = Concerto.objects.get(id=sheet_id)
@@ -178,8 +184,6 @@ def save_sheet(request):
         return JsonResponse({'error': 'Seller not found'}, status=404)
     except Concerto.DoesNotExist:
         return JsonResponse({'error': 'Concerto not found'}, status=404)
-
-def post_sheet(request):
 
 
 
