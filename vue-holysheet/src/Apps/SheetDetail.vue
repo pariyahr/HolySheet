@@ -3,12 +3,9 @@
     <div class="content1">
       <ul class="navbar">
             <li><div class="active">
-                <RouterLink to="/Home"> Home </RouterLink>
-            </div></li>
-            <li><div class="active">
                 <RouterLink to="/Explore"> Explore </RouterLink>
             </div></li>
-            <li><div class="active">
+            <li><div class="active" v-if="visib2">
                 <RouterLink to="/Add"> Add </RouterLink>
             </div></li>
             <li><div class="active">
@@ -34,12 +31,15 @@
 
 <script>
 //import SheetDisplay from "@/Apps/SheetDisplay.vue";
+import axios from "axios";
 
 export default {
   name: "SheetDetail",
     //components: {SheetDisplay},
   data() {
     return {
+      components: [],
+      visib2: "",
       sheet: {
           default: () => ({
             title: "Moonlight Sonata",
@@ -64,10 +64,20 @@ export default {
     },
     followUser() {
       // Implement follow functionality
-    }
+    },
+    async fetchComponents() {
+            try {
+                const response = await axios.get('/components/');
+                this.components = response.data;
+                this.visib2 = this.components[0].is_seller;
+            } catch (error) {
+                console.error('Error fetching components:', error);
+            }
+        },
   },
   mounted() {
     this.fetchSheetDetails();
+     this.fetchComponents();
   }
 };
 </script>

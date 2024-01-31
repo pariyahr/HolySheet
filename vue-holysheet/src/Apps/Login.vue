@@ -71,7 +71,7 @@ export default {
                 .then(response => {
                     // Handle success response
                     console.log(response.data.message);
-                    router.push('/home');
+                    router.push('/explore');
                 })
                 .catch(error => {
                     // Handle error response

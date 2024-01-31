@@ -3,9 +3,6 @@
         <div class="content">
             <ul class="navbar">
                 <li><div class="active">
-                    <RouterLink to="/Home"> Home </RouterLink>
-                </div></li>
-                <li><div class="active">
                     <RouterLink to="/Explore"> Explore </RouterLink>
                 </div></li>
                 <li><div class="active">

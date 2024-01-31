@@ -11,12 +11,9 @@
     <div class="content">
         <ul class="navbar">
             <li><div class="active">
-                <RouterLink to="/Home"> Home </RouterLink>
-            </div></li>
-            <li><div class="active">
                 <RouterLink to="/Explore"> Explore </RouterLink>
             </div></li>
-            <li><div class="active">
+            <li><div class="active" v-if="visib2">
                 <RouterLink to="/Add"> Add </RouterLink>
             </div></li>
             <li><div class="active">
