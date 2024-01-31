@@ -3,12 +3,9 @@
     <div class="content1">
       <ul class="navbar">
             <li><div class="active">
-                <RouterLink to="/Home"> Home </RouterLink>
-            </div></li>
-            <li><div class="active">
                 <RouterLink to="/Explore"> Explore </RouterLink>
             </div></li>
-            <li><div class="active">
+            <li><div class="active" v-if="visib2">
                 <RouterLink to="/Add"> Add </RouterLink>
             </div></li>
             <li><div class="active">
@@ -51,6 +48,8 @@ export default {
   },
   data() {
     return {
+      components: [],
+      visib2: "",
       showSearch: false,
       searchQuery: '',
         apiURL: 'http://127.0.0.1:8000/api/concerto/',
@@ -91,7 +90,6 @@ export default {
       // ],
     };
   },
-
   computed: {
     filteredSheets() {
       // Filter sheets only if there's a search query
@@ -106,6 +104,15 @@ export default {
     }
   },
   methods: {
+    async fetchComponents() {
+            try {
+                const response = await axios.get('/components/');
+                this.components = response.data;
+                this.visib2 = this.components[0].is_seller;
+            } catch (error) {
+                console.error('Error fetching components:', error);
+            }
+        },
 
       toggleSearchBar() {
         this.showSearch = !this.showSearch;
@@ -132,6 +139,7 @@ export default {
   },
   mounted() {
     this.fetchTrendingSheets();
+     this.fetchComponents();
   }
 };
 </script>

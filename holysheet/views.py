@@ -115,9 +115,6 @@ def register(request):
     return JsonResponse({'message': 'Invalid request'}, status=400)
 
 
-def home(request):
-    print("home")
-    return JsonResponse({'message': 'in home page'})
 
 
 @api_view(['GET'])
