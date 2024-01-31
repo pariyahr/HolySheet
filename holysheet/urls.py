@@ -18,6 +18,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('components/', views.component_list, name='component-list'),
     path('components/new/', views.handle, name='component-detail'),
+    path('saved/', views.saved_list),
     path('api/components/', component_list, name='component-list'),
     path('api/components/<int:component_id>/', ComponentDetailView.as_view(), name='component-detail'),
 

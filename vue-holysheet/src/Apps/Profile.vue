@@ -88,9 +88,7 @@
         </div>
     </div>
 
-
   </div>
-
 
 </div>
 
@@ -121,9 +119,9 @@ export default {
         this.fetchComponents();
     },
     methods:{
-        fetchTrendingSheets(){
-
-
+        async fetchTrendingSheets(){
+            const response = await axios.get('/saved/');
+            this.components = response.data;
         },
         goToSheetPage(){
             router.push('/sheet')

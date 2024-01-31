@@ -152,7 +152,11 @@ def handle(request):
         return JsonResponse({'message': 'Component updated successfully'})
 
 
-
+def saved_list(request):
+    component = Seller.objects.get(username=request.session.get('user_id'))
+    data = [{'saved': component.saved_concerto}]
+    print(data)
+    return JsonResponse(data, safe=False)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
