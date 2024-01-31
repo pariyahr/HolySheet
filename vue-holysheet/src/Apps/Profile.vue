@@ -7,7 +7,7 @@
     <title>Profile</title>
 </head>
 <div :class="{ 'dark-mode': isDarkMode }">
-<div class="bg-img" v-for="component in components" :key="component.id">
+<div class="bg-img">
     <div class="content">
         <ul class="navbar">
             <li><div class="active">
@@ -52,7 +52,12 @@
             <button v-on:click="vis" type="submit">edit profile</button>
         </div>
     </div>
+    <form @submit="handleSubmit" method="POST" >
     <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 39%;">
+        <div class="field">
+            <a1>Previous Username</a1>
+            <input type="text" placeholder="Enter Previous Username" name="pre_username">
+        </div>
         <div class="field">
             <a1>Username</a1>
             <input type="text" placeholder="Enter Username" name="username">
@@ -69,6 +74,7 @@
             <button type="submit">Submit</button>
         </div>
     </div>
+    </form>
 
     <div class="container" style="position: absolute; top: 15%; left: 77%;">
             <div class="field" style="width: 150px;">
@@ -102,7 +108,7 @@ export default {
     data() {
       return {
         visib: "",
-        components: [],
+        component: "",
         buttonText: 'Dark Mode',
         isTextChanged: false,
         isDarkMode: false,
@@ -127,11 +133,39 @@ export default {
         },
         async fetchComponents() {
             try {
-                const response = await axios.get('/api/components/');
-                this.components = response.data;
+                const response = await axios.get('/components/');
+                this.component = response.data;
             } catch (error) {
                 console.error('Error fetching components:', error);
             }
+        },
+        handleSubmit(event) {
+            event.preventDefault();
+
+            // Retrieve form data
+            const formData = new FormData(event.target);
+
+            // Set CSRF token in form data
+
+            // Send a POST request to the Django backend
+            axios.defaults.headers.common = {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': window.csrf_token
+            };
+
+            axios.post('/components/new/', formData, {
+                xsrfCookieName: 'csrftoken',
+                xsrfHeaderName: 'X-CSRFTOKEN',
+            })
+                .then(response => {
+                    // Handle success response
+                    console.log(response.data.message);
+                })
+                .catch(error => {
+                    // Handle error response
+                    console.error(error);
+                });
+
         }
     }
 }

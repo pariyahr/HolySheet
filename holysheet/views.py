@@ -130,29 +130,23 @@ class convertoViewSet(viewsets.ModelViewSet):
     serializer_class = ConcertoSerializer
 
 def component_list(request):
-    customers = Seller.objects.all()
-    data = [{'username': customer.username, 'followers': customer.followers_num, 'followings': customer.followings_num} for customer in customers]
+    data = [{'username': logged_in_seller.username, 'followers': logged_in_seller.followers_num, 'followings': logged_in_seller.followings_num}]
+    print(data)
     return JsonResponse(data, safe=False)
 
 
-
-@method_decorator(csrf_exempt, name='dispatch')
-class ComponentDetailView(View):
-    def get(self, request, component_id):
-        customer = get_object_or_404(Seller, pk=component_id)
-        data = {'username': customer.username, 'followers': customer.followers_num,
-                'followings': customer.followings_num}
-        return JsonResponse(data)
-    def put(self, request, component_id):
-        component = get_object_or_404(Seller, pk=component_id)
-
-        data = json.loads(request.body.decode('utf-8'))
-
-        component.username = data.get('username', component.username)
-        component.password = data.get('password', component.password)
-
+def handle(request):
+    # if request.method == 'GET':
+    #     print("llllll")
+    #     customer = get_object_or_404(Seller, pk=component_id)
+    #     data = {'username': customer.username, 'followers': customer.followers_num,
+    #             'followings': customer.followings_num}
+    #     return JsonResponse(data)
+    if request.method == 'POST':
+        component = Seller.objects.get(username=request.POST.get('pre_username'))
+        component.username = request.POST.get('username')
+        component.password = request.POST.get('password')
         component.save()
-
         return JsonResponse({'message': 'Component updated successfully'})
 
 
