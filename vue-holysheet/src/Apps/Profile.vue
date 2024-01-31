@@ -127,6 +127,7 @@ export default {
             router.push('/sheet')
         },
         changeButtonText() {
+
             this.isDarkMode = !this.isDarkMode;
             this.isTextChanged = !this.isTextChanged;
             this.buttonText = this.isTextChanged ? 'Light Mode' : 'Dark Mode';

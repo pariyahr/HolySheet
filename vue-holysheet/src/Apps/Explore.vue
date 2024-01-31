@@ -28,7 +28,7 @@
         <h1 style="margin-bottom: 10px">Trending Sheets</h1>
         <div class="scroll-scope" style="padding: 20px">
           <ul1>
-            <li1 v-for="sheet in filteredSheets" :key="sheet.id" @click="goToSheetPage()">
+            <li1 v-for="sheet in filteredSheets" :key="sheet.id" @click="goToSheetPage(sheet.id)">
               <sheet-display :sheet="sheet"></sheet-display>
             </li1>
           </ul1>
@@ -125,9 +125,8 @@ export default {
       searchSheets(){
           this.showSearch = !this.showSearch;
       },
-      goToSheetPage() {
-        // Route to the sheet detail page with the sheet's Isheet.id
-        router.push('/sheet');
+      goToSheetPage(sheetId) {
+        router.push({ name: 'SheetDetail', params: { id: sheetId } });
       },
 
   },

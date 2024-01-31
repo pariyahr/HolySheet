@@ -33,9 +33,10 @@ const routes= [
         component: Add
     },
     {
-          path: '/sheet',
-          component: SheetDetail
-    }
+        path: '/sheet/:id',
+        name: 'SheetDetail',
+        component: SheetDetail
+      },
 ]
 
 const router = createRouter({

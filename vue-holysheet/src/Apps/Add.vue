@@ -113,7 +113,7 @@ export default {
             formData.append('price', this.newSheet.price);
             formData.append('composer', this.newSheet.composer);
 
-            axios.post('/Add/', formData, {
+            axios.post('/api/post_sheet/', formData, {
                 xsrfCookieName: 'csrftoken',
                 xsrfHeaderName: 'X-CSRFTOKEN',
             })

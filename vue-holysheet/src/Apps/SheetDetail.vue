@@ -20,7 +20,7 @@
         </ul>
 
         <div >
-          <h1>{{ sheet.title }}</h1>
+          <h1>{{ sheet.name }}</h1>
           <!-- Display sheet details, user info, and image -->
           <!-- Save and Follow buttons -->
           <button @click="saveSheet">Save Sheet</button>
@@ -34,7 +34,7 @@
 
 <script>
 //import SheetDisplay from "@/Apps/SheetDisplay.vue";
-
+import axios from "axios";
 export default {
   name: "SheetDetail",
     //components: {SheetDisplay},
@@ -53,22 +53,41 @@ export default {
     };
   },
   methods: {
-    async fetchSheetDetails() {
-      // const sheetId = this.$route.params.id;
-      // // Replace the following line with your actual data fetching logic
-      // const response = await fetch('/api/sheets/' + sheetId); // Fetching from an API as an example
-      // this.sheet = await response.json();
+    fetchSheetDetails() {
+      const sheetId = this.$route.params.id;
+      axios.get('/api/concerto/' + sheetId)
+        .then(response => {
+          this.sheet = response.data;
+        })
+        .catch(error => {
+          console.error("Error fetching sheet details:", error);
+        });
     },
     saveSheet() {
-      // Implement save functionality
+      const sheetId = this.sheet.id; // Assuming you have the sheet's ID
+      axios.post('/api/save_sheet/', { sheetId: sheetId, sellerId: this.owner }, {
+                xsrfCookieName: 'csrftoken',
+                xsrfHeaderName: 'X-CSRFTOKEN',
+            })
+        .then(response => {
+          // Handle the success response
+          console.log("Sheet saved successfully:", response.data);
+        })
+        .catch(error => {
+          // Handle the error
+          console.error("Error saving sheet:", error);
+        });
     },
     followUser() {
       // Implement follow functionality
     }
   },
+    watch: {
+    '$route': 'fetchSheetDetails', // Re-fetch data when route changes
+  },
   mounted() {
     this.fetchSheetDetails();
-  }
+  },
 };
 </script>
 

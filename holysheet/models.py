@@ -47,6 +47,7 @@ class Seller(models.Model):
     followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
     posts_num = models.IntegerField(_('posts'), max_length=100, default=0)
     saved_concertos = models.ManyToManyField('Concerto', related_name='saved_by', blank=True)
+    posted_concertos = models.ManyToManyField('Concerto', related_name='posted_by', blank=True)
 
 
     def __str__(self):

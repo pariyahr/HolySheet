@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
@@ -157,6 +159,23 @@ def saved_list(request):
     data = [{'saved': component.saved_concerto}]
     print(data)
     return JsonResponse(data, safe=False)
+
+def save_sheet(request):
+    data = json.loads(request.body)
+    user = Seller.objects.get(username=request.session.get('user_id'))
+    sheet_id = data.get('sheetId')
+    try:
+        concerto = Concerto.objects.get(id=sheet_id)
+        user.saved_concertos.add(concerto)
+        return JsonResponse({'status': 'success'})
+    except Seller.DoesNotExist:
+        return JsonResponse({'error': 'Seller not found'}, status=404)
+    except Concerto.DoesNotExist:
+        return JsonResponse({'error': 'Concerto not found'}, status=404)
+
+def post_sheet(request):
+
+
 
 
 @method_decorator(csrf_exempt, name='dispatch')
