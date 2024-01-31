@@ -24,6 +24,10 @@
             </div></li>
         </ul>
 
+    <div class="field" style="position: absolute; left: 87%; top: 5%; width: 10%">
+        <a1> Assets: {{ component.assests }}</a1>
+    </div>
+
     <div class="profile-header">
       <img class="profile-picture" src="../assets/profile-icon.jpg" alt="Profile Picture" />
     </div>

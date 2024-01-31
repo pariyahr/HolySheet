@@ -136,10 +136,10 @@ class convertoViewSet(viewsets.ModelViewSet):
 def component_list(request):
     if request.session.get('is_seller'):
         component = Seller.objects.get(username=request.session.get('user_id'))
-        data = [{'username': component.username, 'followers': component.followers_num, 'followings': component.followings_num, 'posts': component.posts_num, 'is_seller': True}]
+        data = [{'username': component.username, 'followers': component.followers_num, 'followings': component.followings_num, 'posts': component.posts_num, 'is_seller': True, 'assests': component.assets}]
     else:
         component = Customer.objects.get(username=request.session.get('user_id'))
-        data = [{'username': component.username, 'is_seller': False}]
+        data = [{'username': component.username, 'is_seller': False, 'assests': component.assets}]
     print(request.session.get('is_seller'))
     return JsonResponse(data, safe=False)
 
