@@ -30,9 +30,9 @@
     <div class="profile-header">
       <img class="profile-picture" src="../assets/profile-icon.jpg" alt="Profile Picture" />
     </div>
-    <div class="inner_content" style ="margin-bottom: 10px">
+    <div class="inner_content" style ="margin-bottom: 10px" v-if="visib2">
         <li class="posts" style="list-style: none;">
-          <div class="stat-number">500</div>
+          <div class="stat-number">{{component.posts}}</div>
           <div class="stat-label">Posts</div>
         </li>
         <li class="followers" style="list-style: none;">
@@ -56,11 +56,11 @@
     <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 39%;">
         <div class="field">
             <a1>Username</a1>
-            <input type="text" placeholder="Enter Username" name="username">
+            <input type="text" placeholder="Enter Username" name="username" required>
         </div>
         <div class="field">
             <a1>Password</a1>
-            <input type="password" placeholder="Enter Password" name="password">
+            <input type="password" placeholder="Enter Password" name="password" required>
         </div>
         <div class="field1">
             <a1>Profile Picture</a1>
@@ -109,6 +109,7 @@ export default {
       return {
         visib: "",
         components: [],
+        visib2: "",
         buttonText: 'Dark Mode',
         isTextChanged: false,
         isDarkMode: false,
@@ -139,6 +140,7 @@ export default {
             try {
                 const response = await axios.get('/components/');
                 this.components = response.data;
+                this.visib2 = this.components[0].is_seller;
             } catch (error) {
                 console.error('Error fetching components:', error);
             }
