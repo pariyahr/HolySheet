@@ -40,10 +40,12 @@ def login(request):
         user = None
         try:
             customer = Customer.objects.get(username=username)
+            request.session['is_seller'] = False
             user = customer
         except Customer.DoesNotExist:
             try:
                 seller = Seller.objects.get(username=username)
+                request.session['is_seller'] = True
                 user = seller
             except Seller.DoesNotExist:
                 print("poop")
@@ -131,29 +133,33 @@ class convertoViewSet(viewsets.ModelViewSet):
     serializer_class = ConcertoSerializer
 
 def component_list(request):
-    component = Seller.objects.get(username=request.session.get('user_id'))
-    data = [{'username': component.username, 'followers': component.followers_num, 'followings': component.followings_num}]
-    print(data)
+    if request.session.get('is_seller'):
+        component = Seller.objects.get(username=request.session.get('user_id'))
+        data = [{'username': component.username, 'followers': component.followers_num, 'followings': component.followings_num, 'posts': component.posts_num, 'is_seller': True}]
+    else:
+        component = Customer.objects.get(username=request.session.get('user_id'))
+        data = [{'username': component.username, 'is_seller': False}]
+    print(request.session.get('is_seller'))
     return JsonResponse(data, safe=False)
 
 
 def handle(request):
-    # if request.method == 'GET':
-    #     print("llllll")
-    #     customer = get_object_or_404(Seller, pk=component_id)
-    #     data = {'username': customer.username, 'followers': customer.followers_num,
-    #             'followings': customer.followings_num}
-    #     return JsonResponse(data)
-    if request.method == 'POST':
-        component = Seller.objects.get(username=request.POST.get('pre_username'))
-        component.username = request.POST.get('username')
-        component.password = request.POST.get('password')
-        component.save()
-        return JsonResponse({'message': 'Component updated successfully'})
+    if request.session.get('is_seller'):
+        component = Seller.objects.get(username=request.session.get('user_id'))
+    else:
+        component = Customer.objects.get(username=request.session.get('user_id'))
+
+    component.username = request.POST.get('username')
+    component.password = request.POST.get('password')
+    component.save()
+    return JsonResponse({'message': 'Component updated successfully'})
 
 
 def saved_list(request):
-    component = Seller.objects.get(username=request.session.get('user_id'))
+    if request.session.get('is_seller'):
+        component = Seller.objects.get(username=request.session.get('user_id'))
+    else:
+        component = Customer.objects.get(username=request.session.get('user_id'))
     data = [{'saved': component.saved_concerto}]
     print(data)
     return JsonResponse(data, safe=False)
