@@ -55,10 +55,6 @@
     <form @submit="handleSubmit" method="POST" >
     <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 39%;">
         <div class="field">
-            <a1>Previous Username</a1>
-            <input type="text" placeholder="Enter Previous Username" name="pre_username">
-        </div>
-        <div class="field">
             <a1>Username</a1>
             <input type="text" placeholder="Enter Username" name="username">
         </div>
@@ -82,29 +78,35 @@
             </div>
         </div>
 
-    <div class="scroll-scope" style="position: absolute; top: 22%; left: 71%; width: 20%;">
-    <div class="scrollable-content">
-      <!-- Your scrollable content goes here -->
-      <!-- For example, a long list of items -->
-      <ul class="ul1">
-        <li class="li1" v-for="item in items" :key="item.id">{{ item.name }}</li>
-      </ul>
+    <div class="trending-sheets" style="margin-top: 20px; width: 20%; position: absolute; top: 20%; left: 71%;">
+        <div class="scroll-scope" style="padding: 20px">
+            <ul1>
+                <li1 v-for="sheet in trendingSheets" :key="sheet.id" @click="goToSheetPage()">
+                    <sheet-display :sheet="sheet"></sheet-display>
+                </li1>
+            </ul1>
+        </div>
     </div>
+
+
   </div>
 
 
 </div>
 
 </div>
-</div>
+
 </html>
 </template>
 
 <script>
 import axios from 'axios';
+import SheetDisplay from "@/Apps/SheetDisplay.vue";
+import router from "@/router";
 
 export default {
     name: "Profile_page",
+    components: {SheetDisplay},
     data() {
       return {
         visib: "",
@@ -112,17 +114,20 @@ export default {
         buttonText: 'Dark Mode',
         isTextChanged: false,
         isDarkMode: false,
-        items: [
-            { id: 1, name: 'Item 1' },
-            { id: 2, name: 'Item 2' },
-            // Add more items as needed
-        ],
+        trendingSheets: [],
       };
     },
     mounted() {
         this.fetchComponents();
     },
     methods:{
+        fetchTrendingSheets(){
+
+
+        },
+        goToSheetPage(){
+            router.push('/sheet')
+        },
         changeButtonText() {
             this.isDarkMode = !this.isDarkMode;
             this.isTextChanged = !this.isTextChanged;
