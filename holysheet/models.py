@@ -27,6 +27,7 @@ class Customer(models.Model):
     email = models.EmailField(_('Customer Email'), unique=True, max_length=100)
     profile_picture = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, default='../../vue-holysheet/assets/profile-icon.jpg')
     followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
+    is_logged_in = models.BooleanField(_('logged_in'), default=False)
 
     def __str__(self):
         return f' {self.first_name} {self.last_name}'
@@ -44,6 +45,7 @@ class Seller(models.Model):
     followers_num = models.IntegerField(_('followers'), max_length=100, default=0)
     followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
     posts_num = models.IntegerField(_('posts'), max_length=100, default=0)
+    is_logged_in = models.BooleanField(_('logged_in'), default=False)
 
     def __str__(self):
         return f'Seller Full Name: {self.first_name} {self.last_name}'

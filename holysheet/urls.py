@@ -14,7 +14,7 @@ urlpatterns = [
     path('home_page/', views.home, name='home_page'),
     path('', views.getData),
     path('api/', include(router.urls)),
-    path('api/components/', component_list, name='component-list'),
-    path('api/components/<int:component_id>/', ComponentDetailView.as_view(), name='component-detail'),
+    path('components/', views.component_list, name='component-list'),
+    path('components/new/', views.handle, name='component-detail'),
 
 ]
