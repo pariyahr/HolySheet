@@ -7,7 +7,7 @@
     <title>Profile</title>
 </head>
 <div :class="{ 'dark-mode': isDarkMode }">
-<div class="bg-img">
+<div class="bg-img" v-for="component in components" :key="component.username">
     <div class="content">
         <ul class="navbar">
             <li><div class="active">
@@ -108,7 +108,7 @@ export default {
     data() {
       return {
         visib: "",
-        component: "",
+        components: [],
         buttonText: 'Dark Mode',
         isTextChanged: false,
         isDarkMode: false,
@@ -134,7 +134,7 @@ export default {
         async fetchComponents() {
             try {
                 const response = await axios.get('/components/');
-                this.component = response.data;
+                this.components = response.data;
             } catch (error) {
                 console.error('Error fetching components:', error);
             }

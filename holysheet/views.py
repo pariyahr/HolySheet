@@ -39,6 +39,7 @@ def login(request):
         if user is not None:
 
             if user.password == password:
+                request.session['user_id'] = user.username
                 return JsonResponse({'message': 'Login successful'}, status=200)
             else:
                 return JsonResponse({'message': 'Wrong username or password'}, status=401)
@@ -113,7 +114,8 @@ class sellerViewSet(viewsets.ModelViewSet):
     serializer_class = SellerSerializer
 
 def component_list(request):
-    data = [{'username': logged_in_seller.username, 'followers': logged_in_seller.followers_num, 'followings': logged_in_seller.followings_num}]
+    component = Seller.objects.get(username=request.session.get('user_id'))
+    data = [{'username': component.username, 'followers': component.followers_num, 'followings': component.followings_num}]
     print(data)
     return JsonResponse(data, safe=False)
 
