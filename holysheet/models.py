@@ -46,6 +46,7 @@ class Seller(models.Model):
     followers_num = models.IntegerField(_('followers'), max_length=100, default=0)
     followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
     posts_num = models.IntegerField(_('posts'), max_length=100, default=0)
+    saved_concertos = models.ManyToManyField('Concerto', related_name='saved_by', blank=True)
 
 
     def __str__(self):
@@ -60,6 +61,7 @@ class Preview(models.Model):
 
 class Concerto(models.Model):
     name = models.CharField(_('Concerto Name'), max_length=100)
+    composer = models.CharField(_('Concerto Composer'), max_length=100)
     price = models.IntegerField(_('Concerto Price'))
     concerto_file = models.FileField(_('Concerto File Path'), unique=False)
     score = models.IntegerField(_('Concerto Score'), max_length=2)
@@ -69,6 +71,6 @@ class Concerto(models.Model):
     owner = models.ForeignKey(Seller, on_delete=models.CASCADE, unique=False)
 
     def __str__(self):
-        return (f'Concerto Name: {self.name}, Concerto ID: {self.concerto_ID}, Concerto Score: {self.score} '
+        return (f'Concerto Name: {self.name}, Concerto Score: {self.score} '
                 f'Concerto Price: {self.price} ,Concerto Genre: {self.genre}, Concerto Owner: {self.owner}'
                 f'Concerto Description: {self.description}, Concerto Quality: {self.quality}')

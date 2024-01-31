@@ -28,8 +28,9 @@ def add(request):
         price = request.POST.get('price')
         file = request.POST.get('file')
         score = request.POST.get('score')
+        composer = request.POST.get('composer')
 
-        concerto = Concerto.objects.create(name=name, genre=genre, price=price, concerto_file=file, score=score, owner=Seller.objects.get(username="pariya"))
+        concerto = Concerto.objects.create(name=name, composer=composer, genre=genre, price=price, concerto_file=file, score=score, owner=Seller.objects.get(username=request.session.get('user_id')))
         return JsonResponse({'message': 'submit successful'}, status=201)
 
 def login(request):

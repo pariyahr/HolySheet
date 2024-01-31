@@ -25,7 +25,7 @@
 
       <!-- Trending Sheets Section -->
       <div class="trending-sheets" style="margin-top: 20px; width: 90%;">
-        <h2 style="margin-bottom: 10px">Trending Sheets</h2>
+        <h1 style="margin-bottom: 10px">Trending Sheets</h1>
         <div class="scroll-scope" style="padding: 20px">
           <ul1>
             <li1 v-for="sheet in filteredSheets" :key="sheet.id" @click="goToSheetPage()">
@@ -98,7 +98,7 @@ export default {
       if (this.searchQuery) {
         return this.trendingSheets.filter(sheet =>
           sheet.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          sheet.composer.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          //sheet.composer.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           sheet.genre.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }

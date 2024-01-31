@@ -20,45 +20,66 @@
             <!-- Form for adding sheet music -->
 
 
-            <header> New Sheet </header>
-            <form @submit.prevent="submitSheet" method="POST" >
-  <!--              {% csrf_token %}-->
-                <div class="container">
-                    <div class="field">
-                        <a1>name</a1>
-                        <input type="text" placeholder="Enter Username" name="username" required>
-                    </div>
-                    <div class="field">
-                        <a1>genre</a1>
-                        <input type="text" placeholder="Enter Password" name="password" required>
-                    </div>
+            <h1 style="margin-top: 20px"> New Sheet </h1>
+            <div class="flex-container"  style="height: 70%" >
+                    <!-- First div for PDF display -->
+                    <div class="trending-sheets"  style="margin-top: 20px; " >
+                        <h2 style="margin-bottom: 10px">Sheet PDF</h2>
+                        <div>
 
-                    <div class="field">
-                        <a1>price</a1>
-                        <input type="text" placeholder="Enter Password" name="password" required>
-                    </div>
+                            <!-- Display PDF Preview -->
+                            <div class="scroll-scope" style="padding: 20px; height: 600px">
+                                <input type="file" @change="handleFileUpload" accept="application/pdf" id="file">
+                                <div v-if="pdfPreviewUrl" class="pdf-preview">
 
-                    <div class="field">
-                        <a1 for="file">File</a1>
-                        <input type="file" id="file" @change="handleFileUpload">
+                                    <iframe :src="pdfPreviewUrl" width="100%" height="550px" ></iframe>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="field">
-                        <button type="submit">Submit Sheet</button>
+                    <!-- Second div for the form -->
+                    <div class="sheet-form" >
+                        <form @submit.prevent="submitSheet" method="POST" >
+                  <!--              {% csrf_token %}-->
+                                <div class="container">
+                                    <div class="field">
+                                        <a1>name</a1>
+                                        <input type="text" placeholder="name" v-model="newSheet.name">
+                                    </div>
+                                    <div class="field">
+                                        <a1>genre</a1>
+                                        <input type="text" placeholder="genre" v-model="newSheet.genre">
+                                    </div>
+
+                                    <div class="field">
+                                        <a1>price</a1>
+                                        <input type="text" placeholder="price" v-model="newSheet.price">
+                                    </div>
+
+                                    <div class="field">
+                                        <a1>Composer</a1>
+                                        <input type="text" placeholder="price" v-model="newSheet.composer" >
+                                    </div>
+
+                                    <div class="field">
+                                        <button type="submit">Submit Sheet</button>
+                                    </div>
+
+                                </div>
+                            </form>
                     </div>
-
-                </div>
-            </form>
-
-
+            </div>
         </div>
     </div>
+
 </template>
 
 
 
 <script>
 import axios from 'axios';
+
 
 export default {
     name: "Add_page",
@@ -69,13 +90,19 @@ export default {
                 genre: '',
                 file: null,
                 score: 0,
-                price: 0
-            }
+                price: 0,
+                composer: ''
+            },
+            pdfPreviewUrl: null
         };
     },
     methods: {
-        handleFileUpload(event) {
-            this.newSheet.file = event.target.files[0];
+       handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type === "application/pdf") {
+                this.newSheet.file = file;
+                this.pdfPreviewUrl = URL.createObjectURL(file); // Create a URL for preview
+            }
         },
         submitSheet() {
             const formData = new FormData();
@@ -84,6 +111,7 @@ export default {
             formData.append('file', this.newSheet.file);
             formData.append('score', this.newSheet.score);
             formData.append('price', this.newSheet.price);
+            formData.append('composer', this.newSheet.composer);
 
             axios.post('/Add/', formData, {
                 xsrfCookieName: 'csrftoken',

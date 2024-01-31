@@ -598,4 +598,30 @@ li1 {
   padding: 10px;
 }
 
+.flex-container {
+    display: flex; /* Enables flexbox */
+    justify-content: space-between; /* Horizontally centers the flex items */
+    align-items: center; /* Vertically centers the flex items */
+    margin-top: 10px;
+    margin-left: 70px;
+    margin-right: 70px;
+
+}
+
+.trending-sheets {
+    width: 40%; /* Set your desired width */
+    /* Removed inline style for width in your HTML */
+
+}
+.scroll-scope{
+  box-shadow: 0 0 5px 0;
+
+}
+
+.sheet-form {
+    width: 50%; /* Set your desired width */
+    /* Removed inline style for width in your HTML */
+    position: relative; /* Keeps your existing position styling */
+}
+
 
