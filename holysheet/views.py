@@ -20,6 +20,18 @@ def first_page(request):
     return HttpResponse(template.render())
 
 
+def add(request):
+    if request.method == 'POST':
+        print("meow")
+        name = request.POST.get('name')
+        genre = request.POST.get('genre')
+        price = request.POST.get('price')
+        file = request.POST.get('file')
+        score = request.POST.get('score')
+
+        concerto = Concerto.objects.create(name=name, genre=genre, price=price, concerto_file=file, score=score, owner=Seller.objects.get(username="pariya"))
+        return JsonResponse({'message': 'submit successful'}, status=201)
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -39,6 +51,7 @@ def login(request):
         if user is not None:
 
             if user.password == password:
+
                 return JsonResponse({'message': 'Login successful'}, status=200)
             else:
                 return JsonResponse({'message': 'Wrong username or password'}, status=401)
@@ -111,6 +124,10 @@ class customerViewSet(viewsets.ModelViewSet):
 class sellerViewSet(viewsets.ModelViewSet):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
+
+class convertoViewSet(viewsets.ModelViewSet):
+    queryset = Concerto.objects.all()
+    serializer_class = ConcertoSerializer
 
 def component_list(request):
     customers = Seller.objects.all()

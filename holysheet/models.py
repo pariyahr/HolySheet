@@ -14,6 +14,8 @@ class Genre(models.TextChoices):
     ELECTRONIC = ('ELECTRONIC', _('electronic'))
     METAL = ('METAL', _('metal'))
     RAP = ('RAP', _('rap'))
+    CLASSICAL = ('CLASSICAL', _('classical'))
+
 
 
 class Customer(models.Model):
@@ -60,12 +62,11 @@ class Concerto(models.Model):
     concerto_ID = models.CharField(_('concerto ID'), max_length=10, unique=True)
     price = models.IntegerField(_('Concerto Price'))
     concerto_file = models.FileField(_('Concerto File Path'), unique=True)
-    preview = models.OneToOneField(Preview, unique=True, on_delete=models.CASCADE)
     score = models.IntegerField(_('Concerto Score'), max_length=2)
     genre = models.CharField(_('concerto genre'), choices=Genre.choices, max_length=1000)
-    description = models.CharField(_('Concerto Description'), max_length=1000)
-    quality = models.CharField(_('Concerto Quality'), max_length=1000)
-    owner = models.ForeignKey(Seller, unique=True, on_delete=models.CASCADE)
+    description = models.CharField(_('Concerto Description'), max_length=1000, default="", blank=True)
+    quality = models.CharField(_('Concerto Quality'), max_length=1000, default="", blank=True)
+    owner = models.ForeignKey(Seller, on_delete=models.CASCADE, unique=False)
 
     def __str__(self):
         return (f'Concerto Name: {self.name}, Concerto ID: {self.concerto_ID}, Concerto Score: {self.score} '

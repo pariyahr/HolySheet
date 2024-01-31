@@ -42,6 +42,7 @@
 <script>
 import SheetDisplay from './SheetDisplay.vue';
 import router from "@/router";
+import axios from "axios";
 
 export default {
   name: "Explore_Page",
@@ -52,40 +53,42 @@ export default {
     return {
       showSearch: false,
       searchQuery: '',
-      trendingSheets: [
-        {
-          id: 1,
-          title: "Moonlight Sonata",
-          composer: "Ludwig van Beethoven",
-          genre: "Classical",
-          imagePath: "path/to/moonlight-sonata-image.jpg", // Replace with actual image path
-          rating: 4.5
-        },
-        {
-          id: 2,
-          title: "The Four Seasons",
-          composer: "Antonio Vivaldi",
-          genre: "Baroque",
-          imagePath: "path/to/four-seasons-image.jpg", // Replace with actual image path
-          rating: 3.5
-        },
-        {
-          id: 3,
-          title: "Clair de Lune",
-          composer: "Claude Debussy",
-          genre: "Impressionist",
-          imagePath: "path/to/clair-de-lune-image.jpg", // Replace with actual image path
-          rating: 5
-        },
-        {
-          id: 4,
-          title: "Rhapsody in Blue",
-          composer: "George Gershwin",
-          genre: "Jazz",
-          imagePath: "path/to/rhapsody-in-blue-image.jpg", // Replace with actual image path
-          rating: 4.4
-        }
-      ],
+        apiURL: 'http://127.0.0.1:8000/api/concerto/',
+        trendingSheets :[]
+      // trendingSheets: [
+      //   {
+      //     id: 1,
+      //     title: "Moonlight Sonata",
+      //     composer: "Ludwig van Beethoven",
+      //     genre: "Classical",
+      //     imagePath: "path/to/moonlight-sonata-image.jpg", // Replace with actual image path
+      //     rating: 4.5
+      //   },
+      //   {
+      //     id: 2,
+      //     title: "The Four Seasons",
+      //     composer: "Antonio Vivaldi",
+      //     genre: "Baroque",
+      //     imagePath: "path/to/four-seasons-image.jpg", // Replace with actual image path
+      //     rating: 3.5
+      //   },
+      //   {
+      //     id: 3,
+      //     title: "Clair de Lune",
+      //     composer: "Claude Debussy",
+      //     genre: "Impressionist",
+      //     imagePath: "path/to/clair-de-lune-image.jpg", // Replace with actual image path
+      //     rating: 5
+      //   },
+      //   {
+      //     id: 4,
+      //     title: "Rhapsody in Blue",
+      //     composer: "George Gershwin",
+      //     genre: "Jazz",
+      //     imagePath: "path/to/rhapsody-in-blue-image.jpg", // Replace with actual image path
+      //     rating: 4.4
+      //   }
+      // ],
     };
   },
 
@@ -94,7 +97,7 @@ export default {
       // Filter sheets only if there's a search query
       if (this.searchQuery) {
         return this.trendingSheets.filter(sheet =>
-          sheet.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          sheet.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           sheet.composer.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           sheet.genre.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
@@ -103,12 +106,21 @@ export default {
     }
   },
   methods: {
+
       toggleSearchBar() {
         this.showSearch = !this.showSearch;
       },
 
       fetchTrendingSheets() {
-        // Fetch your sheets data here
+        axios.get(this.apiURL)
+          .then(response => {
+            this.trendingSheets = response.data;
+
+          })
+          .catch(error => {
+
+            console.error("There was an error fetching the sheets:", error);
+          });
       },
       searchSheets(){
           this.showSearch = !this.showSearch;

@@ -6,7 +6,7 @@
     </div>
     <div class="sheet-info">
       <!-- Example title; replace with actual title from your data -->
-      <h3>{{ sheet.title }}</h3>
+      <h3>{{ sheet.name }}</h3>
       <p>Composer: {{ sheet.composer }}</p>
       <p>Genre: {{ sheet.genre }}</p>
       <!-- Add more sheet details as needed -->
@@ -14,7 +14,7 @@
     <div class="sheet-rating" >
       <!-- Star Rating Display -->
       <span v-for="star in 5" :key="star" class="star">
-        {{ star <= sheet.rating ? '★' : '☆' }}
+        {{ star <= sheet.score ? '★' : '☆' }}
       </span>
 <!--      <span class="rating-number">{{ sheet.rating.toFixed(1) }} / 5</span>-->
     </div>

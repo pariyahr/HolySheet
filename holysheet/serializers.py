@@ -10,3 +10,8 @@ class SellerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seller
         fields = '__all__'
+
+class ConcertoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Concerto
+        fields = '__all__'
