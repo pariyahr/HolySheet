@@ -20,6 +20,18 @@ def first_page(request):
     return HttpResponse(template.render())
 
 
+def add(request):
+    if request.method == 'POST':
+        print("meow")
+        name = request.POST.get('name')
+        genre = request.POST.get('genre')
+        price = request.POST.get('price')
+        file = request.POST.get('file')
+        score = request.POST.get('score')
+
+        concerto = Concerto.objects.create(name=name, genre=genre, price=price, concerto_file=file, score=score, owner=Seller.objects.get(username="pariya"))
+        return JsonResponse({'message': 'submit successful'}, status=201)
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -113,6 +125,10 @@ class sellerViewSet(viewsets.ModelViewSet):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
 
+class convertoViewSet(viewsets.ModelViewSet):
+    queryset = Concerto.objects.all()
+    serializer_class = ConcertoSerializer
+
 def component_list(request):
     component = Seller.objects.get(username=request.session.get('user_id'))
     data = [{'username': component.username, 'followers': component.followers_num, 'followings': component.followings_num}]
@@ -132,6 +148,29 @@ def handle(request):
         component.username = request.POST.get('username')
         component.password = request.POST.get('password')
         component.save()
+        return JsonResponse({'message': 'Component updated successfully'})
+
+
+
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ComponentDetailView(View):
+    def get(self, request, component_id):
+        customer = get_object_or_404(Seller, pk=component_id)
+        data = {'username': customer.username, 'followers': customer.followers_num,
+                'followings': customer.followings_num}
+        return JsonResponse(data)
+    def put(self, request, component_id):
+        component = get_object_or_404(Seller, pk=component_id)
+
+        data = json.loads(request.body.decode('utf-8'))
+
+        component.username = data.get('username', component.username)
+        component.password = data.get('password', component.password)
+
+        component.save()
+
         return JsonResponse({'message': 'Component updated successfully'})
 
 

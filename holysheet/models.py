@@ -14,6 +14,8 @@ class Genre(models.TextChoices):
     ELECTRONIC = ('ELECTRONIC', _('electronic'))
     METAL = ('METAL', _('metal'))
     RAP = ('RAP', _('rap'))
+    CLASSICAL = ('CLASSICAL', _('classical'))
+
 
 
 class Customer(models.Model):
@@ -27,7 +29,6 @@ class Customer(models.Model):
     email = models.EmailField(_('Customer Email'), unique=True, max_length=100)
     profile_picture = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, default='../../vue-holysheet/assets/profile-icon.jpg')
     followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
-    is_logged_in = models.BooleanField(_('logged_in'), default=False)
 
     def __str__(self):
         return f' {self.first_name} {self.last_name}'
@@ -45,7 +46,7 @@ class Seller(models.Model):
     followers_num = models.IntegerField(_('followers'), max_length=100, default=0)
     followings_num = models.IntegerField(_('followings'), max_length=100, default=0)
     posts_num = models.IntegerField(_('posts'), max_length=100, default=0)
-    is_logged_in = models.BooleanField(_('logged_in'), default=False)
+
 
     def __str__(self):
         return f'Seller Full Name: {self.first_name} {self.last_name}'
@@ -59,15 +60,13 @@ class Preview(models.Model):
 
 class Concerto(models.Model):
     name = models.CharField(_('Concerto Name'), max_length=100)
-    concerto_ID = models.CharField(_('concerto ID'), max_length=10, unique=True)
     price = models.IntegerField(_('Concerto Price'))
-    concerto_file = models.FileField(_('Concerto File Path'), unique=True)
-    preview = models.OneToOneField(Preview, unique=True, on_delete=models.CASCADE)
+    concerto_file = models.FileField(_('Concerto File Path'), unique=False)
     score = models.IntegerField(_('Concerto Score'), max_length=2)
     genre = models.CharField(_('concerto genre'), choices=Genre.choices, max_length=1000)
-    description = models.CharField(_('Concerto Description'), max_length=1000)
-    quality = models.CharField(_('Concerto Quality'), max_length=1000)
-    owner = models.ForeignKey(Seller, unique=True, on_delete=models.CASCADE)
+    description = models.CharField(_('Concerto Description'), max_length=1000, default="", blank=True)
+    quality = models.CharField(_('Concerto Quality'), max_length=1000, default="", blank=True)
+    owner = models.ForeignKey(Seller, on_delete=models.CASCADE, unique=False)
 
     def __str__(self):
         return (f'Concerto Name: {self.name}, Concerto ID: {self.concerto_ID}, Concerto Score: {self.score} '

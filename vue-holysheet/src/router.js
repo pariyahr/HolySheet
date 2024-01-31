@@ -4,7 +4,7 @@ import Register from "@/Apps/Register.vue" ;
 import Home from "@/Apps/Home.vue"
 import Explore from "@/Apps/Explore.vue"
 import Profile from "@/Apps/Profile.vue"
-import Add from "@/Apps/Add_Content.vue"
+import Add from "@/Apps/Add.vue"
 import SheetDetail from "@/Apps/SheetDetail.vue";
 
 const routes= [
