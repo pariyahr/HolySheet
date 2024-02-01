@@ -29,7 +29,7 @@
     </div>
 
     <div class="profile-header" style="position: absolute; top: 12%; left: 5%;">
-      <img class="profile-picture" src="../assets/profile-icon.jpg" alt="Profile Picture" />
+      <img class="profile-picture" :src="profilePic" alt="Profile Picture" />
     </div>
     <div class="inner_content" style ="margin-bottom: 10px; position: absolute; top: 50%; left: 18.3%;" v-if="visib2">
         <li class="posts" style="list-style: none;">
@@ -133,6 +133,7 @@ export default {
     components: {SheetDisplay},
     data() {
       return {
+        profilePic: ""  ,
         visib: "",
         components: [],
         visib2: "",
@@ -147,6 +148,7 @@ export default {
         this.fetchComponents();
         this.fetchSavedSheets();
         this.fetchPostedSheets();
+
     },
     methods:{
         async fetchSavedSheets() {
@@ -159,6 +161,7 @@ export default {
               console.error("Error fetching saved sheets:", error);
             }
         },
+
         async fetchPostedSheets() {
             try {
               const response = await axios.get('/concerto/posted/', {
@@ -186,6 +189,8 @@ export default {
                 const response = await axios.get('/components/');
                 this.components = response.data;
                 this.visib2 = this.components[0].is_seller;
+                const sellerId = this.components[0].id;
+                this.profilePic = "/seller/" + sellerId
             } catch (error) {
                 console.error('Error fetching components:', error);
             }
