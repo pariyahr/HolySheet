@@ -14,6 +14,11 @@ from .serializers import *
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
+import fitz  # Import PyMuPDF
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.core.files.temp import NamedTemporaryFile
 
 
 # Create your views here.
@@ -156,6 +161,18 @@ def handle(request):
     return JsonResponse({'message': 'Component updated successfully'})
 
 
+@api_view(('GET',))
+def get_saved_sheets(request):
+    if request.session.get('is_seller'):
+        user = Seller.objects.get(username=request.session.get('user_id'))
+    else:
+        user = Customer.objects.get(username=request.session.get('user_id'))
+    print("eshhghhhh")
+    saved_sheets = user.saved_concertos
+
+    serializer = ConcertoSerializer(saved_sheets, many=True)
+    return Response(serializer.data)
+
 def saved_list(request):
     if request.session.get('is_seller'):
         component = Seller.objects.get(username=request.session.get('user_id'))
@@ -183,11 +200,36 @@ def save_sheet(request):
         return JsonResponse({'error': 'Concerto not found'}, status=404)
 
 
+def pdf_first_page(request, concerto_id):
+    # Fetch the Concerto object by its ID
+    print("poopoo")
+    concerto = get_object_or_404(Concerto, pk=concerto_id)
+    pdf_path = concerto.concerto_file.path  # Get the path of the PDF file
+
+    # Open the PDF and extract the first page
+    doc = fitz.open(pdf_path)
+    new_doc = fitz.open()  # Create a new empty PDF
+    new_doc.insert_pdf(doc, from_page=0, to_page=0)  # Insert the first page
+
+    # Instead of saving to a static file, use a temporary file
+    temp_file = NamedTemporaryFile(delete=False, suffix='.pdf', dir=settings.MEDIA_ROOT)
+    new_doc.save(temp_file.name)
+    new_doc.close()
+    doc.close()
+
+    # Serve the new PDF
+    response = FileResponse(open(temp_file.name, 'rb'), content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="first_page.pdf"'
+
+    return response
+
+
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ComponentDetailView(View):
     def get(self, request, component_id):
+
         customer = get_object_or_404(Seller, pk=component_id)
         data = {'username': customer.username, 'followers': customer.followers_num,
                 'followings': customer.followings_num}

@@ -78,7 +78,7 @@
     <div class="trending-sheets" style="margin-top: 20px; width: 20%; position: absolute; top: 20%; left: 71%;">
         <div class="scroll-scope" style="padding: 20px">
             <ul1>
-                <li1 v-for="sheet in trendingSheets" :key="sheet.id" @click="goToSheetPage()">
+                <li1 v-for="sheet in savedSheets" :key="sheet.id" @click="goToSheetPage()">
                     <sheet-display :sheet="sheet"></sheet-display>
                 </li1>
             </ul1>
@@ -110,16 +110,23 @@ export default {
         buttonText: 'Dark Mode',
         isTextChanged: false,
         isDarkMode: false,
-        trendingSheets: [],
+        savedSheets: [],
       };
     },
     mounted() {
         this.fetchComponents();
+        this.fetchSavedSheets();
     },
     methods:{
-        async fetchTrendingSheets(){
-            const response = await axios.get('/saved/');
-            this.components = response.data;
+        async fetchSavedSheets() {
+            try {
+              const response = await axios.get('/concerto/', {
+                withCredentials: true  // Include credentials for authentication
+              });
+              this.savedSheets = response.data;
+            } catch (error) {
+              console.error("Error fetching saved sheets:", error);
+            }
         },
         goToSheetPage(){
             router.push('/sheet')

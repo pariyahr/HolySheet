@@ -16,13 +16,27 @@
             </li>
         </ul>
 
-        <div >
-          <h1>{{ sheet.name }}</h1>
-          <!-- Display sheet details, user info, and image -->
-          <!-- Save and Follow buttons -->
-          <button @click="saveSheet">Save Sheet</button>
-          <button @click="followUser">Follow User</button>
-        </div>
+
+
+                  <div class="trending-sheets"  style="margin-top: 20px; width: 50%">
+                      <h1 >{{ sheet.name }}</h1>
+                      <h1>{{firstPageUrl}}</h1>
+                        <div>
+
+                            <!-- Display PDF Preview -->
+                            <div class="scroll-scope" style="padding: 20px; height: 600px; margin-top: 10px">
+
+                                <div id="pdf-preview-container" style="padding: 20px; height: 600px; margin-top: 10px">
+                                  <img v-if="firstPageUrl" :src="firstPageUrl" alt="First page of PDF" style="max-width: 100%; height: auto;">
+                                </div>
+
+                            </div>
+                        </div>
+                      <button @click="saveSheet">Save Sheet</button>
+                      <button @click="followUser">Follow User</button>
+                    </div>
+
+
 
     </div>
   </div>
@@ -40,6 +54,7 @@ export default {
     return {
       components: [],
       visib2: "",
+        firstPageUrl: "poop.pdf",
       sheet: {
           default: () => ({
             title: "Moonlight Sonata",
@@ -53,6 +68,20 @@ export default {
     };
   },
   methods: {
+      async fetchFirstPage() {
+        const sheetId = this.$route.params.id;
+        try {
+          // Adjust the endpoint as necessary. This is assuming you have an endpoint like this
+          const response = await axios.get('/concerto/' + sheetId);
+          // Assuming the response contains the URL in a property named `url`
+
+          this.firstPageUrl = response.data.url; // Make sure the property name matches your actual response
+
+        } catch (error) {
+          console.error("Error fetching first page of the PDF:", error);
+        }
+      },
+
     fetchSheetDetails() {
       const sheetId = this.$route.params.id;
       axios.get('/api/concerto/' + sheetId)
@@ -97,6 +126,7 @@ export default {
   mounted() {
     this.fetchSheetDetails();
      this.fetchComponents();
+     this.fetchFirstPage();
   }
 };
 </script>
