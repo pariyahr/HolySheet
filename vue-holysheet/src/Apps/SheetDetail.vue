@@ -33,6 +33,8 @@
                         </div>
                       <button @click="saveSheet">Save Sheet</button>
                       <button @click="followUser">Follow User</button>
+                      <button @click="buySheet">Buy Sheet</button>
+
                     </div>
 
 
@@ -69,7 +71,6 @@ export default {
   methods: {
       async fetchFirstPage() {
         const sheetId = this.$route.params.id;
-
         this.firstPageUrl = "/concerto/" + sheetId
 
       },
@@ -98,6 +99,27 @@ export default {
           // Handle the error
           console.error("Error saving sheet:", error);
         });
+    },
+    buySheet(){
+          axios.post('/buySheet/' + this.sheet.id, { sheetId: this.sheet.id, sellerId: this.sheet.owner }, {
+                xsrfCookieName: 'csrftoken',
+                xsrfHeaderName: 'X-CSRFTOKEN',
+            })
+              .then(response => {
+                // Handle the success response
+                console.log("Sheet saved successfully:", response.data);
+                window.location.href = `/download_concerto/${this.sheet.id}/`;
+
+              })
+              .catch(error => {
+                // Handle the error
+                console.error("Error saving sheet:", error);
+              });
+
+
+
+
+
     },
     followUser() {
       axios.post('/api/follow/', {sellerId: this.sheet.owner }, {
@@ -128,9 +150,9 @@ export default {
     '$route': 'fetchSheetDetails', // Re-fetch data when route changes
   },
   mounted() {
-    this.fetchSheetDetails();
-     this.fetchComponents();
-     this.fetchFirstPage();
+      this.fetchSheetDetails();
+      this.fetchComponents();
+      this.fetchFirstPage();
   }
 };
 </script>

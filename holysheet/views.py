@@ -157,6 +157,8 @@ def handle(request):
 
     component.username = request.POST.get('username')
     component.password = request.POST.get('password')
+    component.profile_picture = request.POST.get('file')
+    print(request.POST)
     component.save()
     return JsonResponse({'message': 'Component updated successfully'})
 
@@ -262,7 +264,7 @@ def pdf_first_page(request, concerto_id):
 
 def seller_pic(request, seller_id):
     print("sellerpic")
-    seller= get_object_or_404(Seller, pk=seller_id)
+    seller = get_object_or_404(Seller, pk=seller_id)
     pdf_path = seller.profile_picture.path  # Get the path of the PDF file
     print(pdf_path)
 
@@ -270,6 +272,36 @@ def seller_pic(request, seller_id):
     response['Content-Disposition'] = 'inline; filename="first_page.pdf"'
 
     return response
+
+def buySheet(request , sheet_id):
+    concerto = get_object_or_404(Concerto, pk=sheet_id)
+    user = None
+    try:
+        user = Seller.objects.get(username=request.session.get('user_id'))
+    except Seller.DoesNotExist:
+        user = Customer.objects.get(username=request.session.get('user_id'))
+
+    user.assets -= concerto.price
+    user.save()
+    seller = concerto.owner
+    seller.assets += concerto.price
+    seller.save()
+    print(seller.assets, user.assets)
+
+    return JsonResponse({'success': 'Concerto Bought'}, status=200)
+
+
+def download_concerto(request, concerto_id):
+    concerto = get_object_or_404(Concerto, id=concerto_id)
+    # Here, you would include any logic to verify the user's right to access the file
+    # For example, check if the user has purchased the concerto
+    print(concerto.concerto_file_pdf, concerto.concerto_file_pdf.name)
+    return FileResponse(concerto.concerto_file_pdf, as_attachment=True, filename=concerto.concerto_file_pdf.name)
+
+
+
+
+
 
 
 
