@@ -50,6 +50,8 @@ class Seller(models.Model):
     saved_concertos = models.ManyToManyField('Concerto', related_name='saved_by', blank=True)
     posted_concertos = models.ManyToManyField('Concerto', related_name='posted_by', blank=True)
     assets = models.IntegerField(_('Customer Assets To Purchase'), default='0000000')
+    seller_followers = models.ManyToManyField('Seller')
+    Customer_followers = models.ManyToManyField(Customer)
 
 
     def __str__(self):

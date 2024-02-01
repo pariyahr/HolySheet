@@ -214,6 +214,39 @@ def save_sheet(request):
     except Concerto.DoesNotExist:
         return JsonResponse({'error': 'Concerto not found'}, status=404)
 
+def follow(request):
+    data = json.loads(request.body)
+    user = None
+    isSeller = True
+    try:
+        user = Seller.objects.get(username=request.session.get('user_id'))
+    except Seller.DoesNotExist:
+        user = Customer.objects.get(username=request.session.get('user_id'))
+        isSeller = False
+    owner_id = data.get('sellerId')
+    print("iddd")
+    print(owner_id)
+    try:
+        seller = Seller.objects.get(id=owner_id)
+        print(seller)
+        print(seller.followers_num)
+        # print (seller.followers.all())
+        if user not in seller.seller_followers.all() and user not in seller.Customer_followers.all():
+            if isSeller:
+                seller.seller_followers.add(user)
+            else:
+                seller.Customer_followers.add(user)
+            seller.followers_num = seller.followers_num + 1
+            print(seller.followers_num)
+            user.followings_num = user.followings_num + 1
+            print("addeddd")
+            seller.save()
+            user.save()
+        return JsonResponse({'status': 'success'})
+    except Seller.DoesNotExist:
+        return JsonResponse({'error': 'Seller not found'}, status=404)
+    except Concerto.DoesNotExist:
+        return JsonResponse({'error': 'Concerto not found'}, status=404)
 
 def pdf_first_page(request, concerto_id):
     print("poopoo")

@@ -100,6 +100,18 @@ export default {
         });
     },
     followUser() {
+      axios.post('/api/follow/', {sellerId: this.sheet.owner }, {
+                xsrfCookieName: 'csrftoken',
+                xsrfHeaderName: 'X-CSRFTOKEN',
+            })
+        .then(response => {
+          // Handle the success response
+          console.log("Followed successfully:", response.data);
+        })
+        .catch(error => {
+          // Handle the error
+          console.error("Error following:", error);
+        });
       // Implement follow functionality
     },
     async fetchComponents() {

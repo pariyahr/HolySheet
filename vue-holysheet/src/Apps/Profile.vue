@@ -94,7 +94,7 @@
     </div>
     </div>
 
-    <div style="position: absolute; top: 15%; left: 35%;">
+    <div style="position: absolute; top: 15%; left: 35%;" v-if="visib2">
 
     <div class="container">
             <div class="field" style="width: 150px;">
