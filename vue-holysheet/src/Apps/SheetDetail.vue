@@ -27,7 +27,7 @@
                             <div class="scroll-scope" style="padding: 20px; height: 600px; margin-top: 10px">
 
                                 <div id="pdf-preview-container" style="padding: 20px; height: 600px; margin-top: 10px">
-                                  <img v-if="firstPageUrl" :src="firstPageUrl" alt="First page of PDF" style="max-width: 100%; height: auto;">
+                                  <img SRC="/concerto/1/" alt="First page of PDF" style="max-width: 100%; height: auto;">
                                 </div>
 
                             </div>

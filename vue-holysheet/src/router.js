@@ -28,7 +28,7 @@ const routes= [
         component: Add
     },
     {
-        path: '/sheet/:id',
+        path: '/concerto/:id',
         name: 'SheetDetail',
         component: SheetDetail
       },

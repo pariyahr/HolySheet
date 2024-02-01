@@ -2,6 +2,7 @@ from . import views
 from django.urls import include, path
 from rest_framework import routers
 from .views import *
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'customer', customerViewSet)
@@ -27,4 +28,4 @@ urlpatterns = [
 
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

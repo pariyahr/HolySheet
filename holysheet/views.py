@@ -201,24 +201,29 @@ def save_sheet(request):
 
 
 def pdf_first_page(request, concerto_id):
-    # Fetch the Concerto object by its ID
+    #Fetch the Concerto object by its ID
     print("poopoo")
     concerto = get_object_or_404(Concerto, pk=concerto_id)
-    pdf_path = concerto.concerto_file.path  # Get the path of the PDF file
+    pdf_path = "img.png"
+    #pdf_path = concerto.concerto_file.path  # Get the path of the PDF file
 
-    # Open the PDF and extract the first page
-    doc = fitz.open(pdf_path)
-    new_doc = fitz.open()  # Create a new empty PDF
-    new_doc.insert_pdf(doc, from_page=0, to_page=0)  # Insert the first page
+    # print(pdf_path)
+    # # Open the PDF and extract the first page
+    # doc = fitz.open(pdf_path)
+    # print(doc)
+    # new_doc = fitz.open()  # Create a new empty PDF
+    # new_doc.insert_pdf(doc, from_page=0, to_page=0)  # Insert the first page
+    # print(new_doc)
+    #
+    # # Instead of saving to a static file, use a temporary file
+    # temp_file = NamedTemporaryFile(delete=False, suffix='.pdf', dir=settings.MEDIA_ROOT)
+    # new_doc.save(temp_file.name)
+    # new_doc.close()
+    # doc.close()
 
-    # Instead of saving to a static file, use a temporary file
-    temp_file = NamedTemporaryFile(delete=False, suffix='.pdf', dir=settings.MEDIA_ROOT)
-    new_doc.save(temp_file.name)
-    new_doc.close()
-    doc.close()
 
-    # Serve the new PDF
-    response = FileResponse(open(temp_file.name, 'rb'), content_type='application/pdf')
+
+    response = FileResponse(open(pdf_path, 'rb'), content_type='application/png')
     response['Content-Disposition'] = 'inline; filename="first_page.pdf"'
 
     return response
