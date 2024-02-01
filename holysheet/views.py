@@ -204,9 +204,9 @@ def pdf_first_page(request, concerto_id):
     #Fetch the Concerto object by its ID
     print("poopoo")
     concerto = get_object_or_404(Concerto, pk=concerto_id)
-    pdf_path = "img.png"
-    #pdf_path = concerto.concerto_file.path  # Get the path of the PDF file
-
+    #pdf_path = "img.png"
+    pdf_path = concerto.concerto_file.path  # Get the path of the PDF file
+    print(pdf_path)
     # print(pdf_path)
     # # Open the PDF and extract the first page
     # doc = fitz.open(pdf_path)

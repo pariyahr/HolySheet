@@ -2,7 +2,7 @@
   <div class="sheet-display">
     <div class="sheet-image">
       <!-- Example image; replace with actual image source from your data -->
-       <img :src="sheet.imagePath"  />
+       <img :SRC="firstPageUrl"  />
     </div>
     <div class="sheet-info">
       <!-- Example title; replace with actual title from your data -->
@@ -24,6 +24,11 @@
 <script>
 export default {
   name: 'SheetDisplay',
+    data() {
+    return {
+        firstPageUrl: "poop.pdf",
+    };
+  },
   props: {
     sheet: {
       type: Object,
@@ -37,6 +42,18 @@ export default {
       }),
     },
   },
+    methods:{
+      async fetchFirstPage() {
+        const sheetId = this.sheet.id;
+
+        this.firstPageUrl = "/concerto/" + sheetId
+
+      },
+    },
+    mounted() {
+
+     this.fetchFirstPage();
+  }
 };
 </script>
 
