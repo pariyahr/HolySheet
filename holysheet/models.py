@@ -49,6 +49,7 @@ class Seller(models.Model):
     posts_num = models.IntegerField(_('posts'), max_length=100, default=0)
     saved_concertos = models.ManyToManyField('Concerto', related_name='saved_by', blank=True)
     posted_concertos = models.ManyToManyField('Concerto', related_name='posted_by', blank=True)
+    assets = models.IntegerField(_('Customer Assets To Purchase'), default='0000000')
 
 
     def __str__(self):
