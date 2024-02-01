@@ -86,7 +86,7 @@
     <div class="trending-sheets" style="margin-top: 20px; width: 70%;">
         <div class="scroll-scope" style="padding: 20px">
             <ul1>
-                <li1 v-for="sheet in savedSheets" :key="sheet.id" @click="goToSheetPage()">
+                <li1 v-for="sheet in savedSheets" :key="sheet.id" @click="goToSheetPage(sheet.id)">
                     <sheet-display :sheet="sheet"></sheet-display>
                 </li1>
             </ul1>
@@ -106,7 +106,7 @@
     <div class="trending-sheets" style="margin-top: 20px; width: 100%; height: 50%;">
         <div class="scroll-scope" style="padding: 20px">
             <ul1>
-                <li1 v-for="sheet in postedSheets" :key="sheet.id" @click="goToSheetPage()">
+                <li1 v-for="sheet in postedSheets" :key="sheet.id" @click="goToSheetPage(sheet.id)">
                     <sheet-display :sheet="sheet"></sheet-display>
                 </li1>
             </ul1>
@@ -172,8 +172,8 @@ export default {
               console.error("Error fetching posted sheets:", error);
             }
         },
-        goToSheetPage(){
-            router.push('/sheet')
+        goToSheetPage(sheetId){
+            router.push('/concerto/' + sheetId);
         },
         changeButtonText() {
 
