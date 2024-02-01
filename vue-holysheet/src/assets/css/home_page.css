@@ -164,7 +164,7 @@
   text-align: center;
   color :white;
   height: 100%;
-  width: 102%;
+  width: 93%;
   background-color: black;
   border-radius: 30px;
   font-size: 16px;
@@ -180,7 +180,7 @@
   text-align: center;
   color :white;
   height: 100%;
-  width: 66.5%;
+  width: 72%;
   background-color: black;
   border-radius: 30px;
   font-size: 16px;
@@ -191,7 +191,7 @@
 
 .field input{
   height: 100%;
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -463,14 +463,13 @@ ul.navbar li a:hover{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   margin-bottom: 20px;
   vertical-align: text-top;
 }
 
 .profile-picture {
-  width: 400px; /* Adjust as needed */
-  height: 400px; /* Adjust as needed */
+  width: 250px; /* Adjust as needed */
+  height: 250px; /* Adjust as needed */
   border-radius: 50%;
   object-fit: cover;
   margin-right: 20px;

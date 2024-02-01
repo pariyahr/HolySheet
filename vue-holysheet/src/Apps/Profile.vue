@@ -28,10 +28,10 @@
         <a1> Assets: {{ component.assests }}</a1>
     </div>
 
-    <div class="profile-header">
+    <div class="profile-header" style="position: absolute; top: 12%; left: 5%;">
       <img class="profile-picture" src="../assets/profile-icon.jpg" alt="Profile Picture" />
     </div>
-    <div class="inner_content" style ="margin-bottom: 10px" v-if="visib2">
+    <div class="inner_content" style ="margin-bottom: 10px; position: absolute; top: 50%; left: 18.3%;" v-if="visib2">
         <li class="posts" style="list-style: none;">
           <div class="stat-number">{{component.posts}}</div>
           <div class="stat-label">Posts</div>
@@ -45,16 +45,17 @@
           <div class="stat-label">Followings</div>
         </li>
     </div>
-    <div class="profile-details">
+    <div class="profile-details" style="position: absolute; top: 8%; left: 16.5%;">
        <h1 class="username">{{component.username}}</h1>
     </div>
-    <div class="container" style="position: absolute; top: 31%; left: 45.7%;">
+    <div style="position: absolute; top: 58%; left: 7.5%;">
+    <div class="container">
         <div class="field" style="width: 150px;">
             <button v-on:click="vis" type="submit">edit profile</button>
         </div>
     </div>
     <form @submit="handleSubmit" method="POST" >
-    <div v-if="visib" class="container" style="position: absolute; top: 40%; left: 39%;">
+    <div v-if="visib" class="container">
         <div class="field">
             <a1>Username</a1>
             <input type="text" placeholder="Enter Username" name="username" required>
@@ -72,14 +73,17 @@
         </div>
     </div>
     </form>
+    </div>
 
-    <div class="container" style="position: absolute; top: 15%; left: 77%;">
+    <div style="position: absolute; top: 15%; left: 70%;">
+
+    <div class="container">
             <div class="field" style="width: 150px;">
                 <a1>Saved</a1>
             </div>
         </div>
 
-    <div class="trending-sheets" style="margin-top: 20px; width: 20%; position: absolute; top: 20%; left: 71%;">
+    <div class="trending-sheets" style="margin-top: 20px; width: 70%;">
         <div class="scroll-scope" style="padding: 20px">
             <ul1>
                 <li1 v-for="sheet in savedSheets" :key="sheet.id" @click="goToSheetPage()">
@@ -87,6 +91,27 @@
                 </li1>
             </ul1>
         </div>
+    </div>
+    </div>
+
+    <div style="position: absolute; top: 15%; left: 35%;">
+
+    <div class="container">
+            <div class="field" style="width: 150px;">
+                <a1>Posts</a1>
+            </div>
+        </div>
+
+
+    <div class="trending-sheets" style="margin-top: 20px; width: 100%; height: 50%;">
+        <div class="scroll-scope" style="padding: 20px">
+            <ul1>
+                <li1 v-for="sheet in postedSheets" :key="sheet.id" @click="goToSheetPage()">
+                    <sheet-display :sheet="sheet"></sheet-display>
+                </li1>
+            </ul1>
+        </div>
+    </div>
     </div>
 
   </div>
@@ -115,11 +140,13 @@ export default {
         isTextChanged: false,
         isDarkMode: false,
         savedSheets: [],
+        postedSheets: [],
       };
     },
     mounted() {
         this.fetchComponents();
         this.fetchSavedSheets();
+        this.fetchPostedSheets();
     },
     methods:{
         async fetchSavedSheets() {
@@ -130,6 +157,16 @@ export default {
               this.savedSheets = response.data;
             } catch (error) {
               console.error("Error fetching saved sheets:", error);
+            }
+        },
+        async fetchPostedSheets() {
+            try {
+              const response = await axios.get('/concerto/posted/', {
+                withCredentials: true  // Include credentials for authentication
+              });
+              this.postedSheets = response.data;
+            } catch (error) {
+              console.error("Error fetching posted sheets:", error);
             }
         },
         goToSheetPage(){
