@@ -26,7 +26,9 @@ urlpatterns = [
     path('concerto/posted/', views.get_posted_sheets, name='saved_sheets'),
     path('concerto/bought/', views.get_bought_sheets, name='saved_sheets'),
     path('concerto/<int:concerto_id>/', views.pdf_first_page, name='pdf_first_page'),
-    path('seller/<int:seller_id>', views.seller_pic, name="seller_pic")
+    path('seller/<int:seller_id>', views.seller_pic, name="seller_pic"),
+    path('buySheet/<int:sheet_id>', views.buySheet, name="buySheet"),
+    path('download_concerto/<int:concerto_id>/', views.download_concerto, name='download_concerto'),
 
 
 

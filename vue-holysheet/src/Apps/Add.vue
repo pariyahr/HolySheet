@@ -96,7 +96,7 @@ export default {
     methods: {
        handleFileUpload(event) {
             const file = event.target.files[0];
-            if (file && file.type === "application/pdf") {
+            if (file && file.type === "application/png") {
                 this.newSheet.file = file;
                 this.pdfPreviewUrl = URL.createObjectURL(file); // Create a URL for preview
             }

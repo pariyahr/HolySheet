@@ -29,6 +29,7 @@
     </div>
 
     <div class="profile-header" style="position: absolute; top: 12%; left: 5%;">
+
       <img class="profile-picture" :src="profilePic" alt="Profile Picture" />
     </div>
     <div class="inner_content" style ="margin-bottom: 10px; position: absolute; top: 50%; left: 18.3%;" v-if="visib2">
@@ -57,16 +58,16 @@
     <form @submit="handleSubmit" method="POST" >
     <div v-if="visib" class="container">
         <div class="field">
-            <a1>Username</a1>
-            <input type="text" placeholder="Enter Username" name="username" required>
+            <a1>Change Username</a1>
+            <input type="text" placeholder="New Username" name="username" required>
         </div>
         <div class="field">
-            <a1>Password</a1>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <a1>Change Password</a1>
+            <input type="password" placeholder="New Password" name="password" required>
         </div>
         <div class="field1">
             <a1>Profile Picture</a1>
-            <input type="file" id="myfile" name="myfile">
+            <input  type="file" @change="handleFileUpload" id="file" name="file">
         </div>
         <div class="field">
             <button type="submit">Submit</button>
@@ -133,7 +134,8 @@ export default {
     components: {SheetDisplay},
     data() {
       return {
-        profilePic: ""  ,
+        profilePic: "",
+          profile_pic: "",
         visib: "",
         components: [],
         visib2: "",
@@ -150,6 +152,7 @@ export default {
         this.fetchPostedSheets();
 
     },
+
     methods:{
         async fetchSavedSheets() {
             try {
@@ -160,6 +163,17 @@ export default {
             } catch (error) {
               console.error("Error fetching saved sheets:", error);
             }
+        },
+        async handleFileUpload() {
+            const response = await axios.get('/components/');
+            this.components = response.data;
+
+            //const file = event.target.elements.file;
+
+
+
+
+
         },
 
         async fetchPostedSheets() {
@@ -195,18 +209,21 @@ export default {
                 console.error('Error fetching components:', error);
             }
         },
-        handleSubmit(event) {
+        async handleSubmit(event) {
             event.preventDefault();
 
-            // Retrieve form data
+            this.profile_pic = event.target.elements.file.files[0].name;
             const formData = new FormData(event.target);
+            formData.append('file', this.profile_pic);
+            const csrf_token = document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
 
+            this.components[0].profilePic = formData.get('file')
             // Set CSRF token in form data
 
             // Send a POST request to the Django backend
             axios.defaults.headers.common = {
                 'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': window.csrf_token
+                'X-CSRF-TOKEN': csrf_token
             };
 
             axios.post('/components/new/', formData, {
