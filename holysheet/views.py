@@ -141,10 +141,10 @@ class convertoViewSet(viewsets.ModelViewSet):
 def component_list(request):
     if request.session.get('is_seller'):
         component = Seller.objects.get(username=request.session.get('user_id'))
-        data = [{'username': component.username, 'followers': component.followers_num, 'followings': component.followings_num, 'posts': component.posts_num, 'is_seller': True, 'assests': component.assets}]
+        data = [{'id': component.id, 'username': component.username, 'followers': component.followers_num, 'followings': component.followings_num, 'posts': component.posts_num, 'is_seller': True, 'assests': component.assets}]
     else:
         component = Customer.objects.get(username=request.session.get('user_id'))
-        data = [{'username': component.username, 'is_seller': False, 'assests': component.assets}]
+        data = [{'id': component.id, 'username': component.username, 'is_seller': False, 'assests': component.assets}]
     print(request.session.get('is_seller'))
     return JsonResponse(data, safe=False)
 
@@ -216,27 +216,22 @@ def save_sheet(request):
 
 
 def pdf_first_page(request, concerto_id):
-    #Fetch the Concerto object by its ID
     print("poopoo")
     concerto = get_object_or_404(Concerto, pk=concerto_id)
-    pdf_path = "img.png"
-    #pdf_path = concerto.concerto_file.path  # Get the path of the PDF file
+    pdf_path = concerto.concerto_file.path  # Get the path of the PDF file
+    print(pdf_path)
 
-    # print(pdf_path)
-    # # Open the PDF and extract the first page
-    # doc = fitz.open(pdf_path)
-    # print(doc)
-    # new_doc = fitz.open()  # Create a new empty PDF
-    # new_doc.insert_pdf(doc, from_page=0, to_page=0)  # Insert the first page
-    # print(new_doc)
-    #
-    # # Instead of saving to a static file, use a temporary file
-    # temp_file = NamedTemporaryFile(delete=False, suffix='.pdf', dir=settings.MEDIA_ROOT)
-    # new_doc.save(temp_file.name)
-    # new_doc.close()
-    # doc.close()
+    response = FileResponse(open(pdf_path, 'rb'), content_type='application/png')
+    response['Content-Disposition'] = 'inline; filename="first_page.pdf"'
+
+    return response
 
 
+def seller_pic(request, seller_id):
+    print("sellerpic")
+    seller= get_object_or_404(Seller, pk=seller_id)
+    pdf_path = seller.profile_picture.path  # Get the path of the PDF file
+    print(pdf_path)
 
     response = FileResponse(open(pdf_path, 'rb'), content_type='application/png')
     response['Content-Disposition'] = 'inline; filename="first_page.pdf"'

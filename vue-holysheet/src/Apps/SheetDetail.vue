@@ -20,14 +20,13 @@
 
                   <div class="trending-sheets"  style="margin-top: 20px; width: 50%">
                       <h1 >{{ sheet.name }}</h1>
-                      <h1>{{firstPageUrl}}</h1>
                         <div>
 
                             <!-- Display PDF Preview -->
                             <div class="scroll-scope" style="padding: 20px; height: 600px; margin-top: 10px">
 
                                 <div id="pdf-preview-container" style="padding: 20px; height: 600px; margin-top: 10px">
-                                  <img SRC="/concerto/1/" alt="First page of PDF" style="max-width: 100%; height: auto;">
+                                  <img :SRC="firstPageUrl" alt="First page of PDF" style="max-width: 100%; height: auto;">
                                 </div>
 
                             </div>
@@ -70,16 +69,9 @@ export default {
   methods: {
       async fetchFirstPage() {
         const sheetId = this.$route.params.id;
-        try {
-          // Adjust the endpoint as necessary. This is assuming you have an endpoint like this
-          const response = await axios.get('/concerto/' + sheetId);
-          // Assuming the response contains the URL in a property named `url`
 
-          this.firstPageUrl = response.data.url; // Make sure the property name matches your actual response
+        this.firstPageUrl = "/concerto/" + sheetId
 
-        } catch (error) {
-          console.error("Error fetching first page of the PDF:", error);
-        }
       },
 
     fetchSheetDetails() {
