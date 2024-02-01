@@ -173,6 +173,21 @@ def get_saved_sheets(request):
     serializer = ConcertoSerializer(saved_sheets, many=True)
     return Response(serializer.data)
 
+@api_view(('GET',))
+def get_posted_sheets(request):
+    user = Seller.objects.get(username=request.session.get('user_id'))
+    posted_sheets = user.posted_concertos
+
+    serializer = ConcertoSerializer(posted_sheets, many=True)
+    return Response(serializer.data)
+
+@api_view(('GET',))
+def get_bought_sheets(request):
+    user = Customer.objects.get(username=request.session.get('user_id'))
+    bought_sheets = user.bought_concertos
+
+    serializer = ConcertoSerializer(bought_sheets, many=True)
+    return Response(serializer.data)
 def saved_list(request):
     if request.session.get('is_seller'):
         component = Seller.objects.get(username=request.session.get('user_id'))

@@ -23,7 +23,8 @@ urlpatterns = [
     path('api/components/<int:component_id>/', ComponentDetailView.as_view(), name='component-detail'),
     path('api/save_sheet/', views.save_sheet, name='save_sheet'),
     path('concerto/', views.get_saved_sheets, name='saved_sheets'),
-
+    path('concerto/posted/', views.get_posted_sheets, name='saved_sheets'),
+    path('concerto/bought/', views.get_bought_sheets, name='saved_sheets'),
     path('concerto/<int:concerto_id>/', views.pdf_first_page, name='pdf_first_page'),
 
 
