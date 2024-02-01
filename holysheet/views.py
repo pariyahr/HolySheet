@@ -33,11 +33,14 @@ def add(request):
         name = request.POST.get('name')
         genre = request.POST.get('genre')
         price = request.POST.get('price')
-        file = request.POST.get('file')
+        file = request.FILES.get('file')
         score = request.POST.get('score')
         composer = request.POST.get('composer')
-
-        concerto = Concerto.objects.create(name=name, composer=composer, genre=genre, price=price, concerto_file=file, score=score, owner=Seller.objects.get(username=request.session.get('user_id')))
+        pdf_file = request.FILES.get('pdf_file')
+        print(request.POST)
+        concerto = Concerto.objects.create(name=name, composer=composer, genre=genre, price=price, concerto_file=file,
+                                           concerto_file_pdf=pdf_file, score=score,
+                                           owner=Seller.objects.get(username=request.session.get('user_id')))
         user = Seller.objects.get(username=request.session.get('user_id'))
         user.posted_concertos.add(concerto)
         return JsonResponse({'message': 'submit successful'}, status=201)
@@ -157,7 +160,7 @@ def handle(request):
 
     component.username = request.POST.get('username')
     component.password = request.POST.get('password')
-    component.profile_picture = request.POST.get('file')
+    component.profile_picture = request.FILES.get('file')
     print(request.POST)
     component.save()
     return JsonResponse({'message': 'Component updated successfully'})

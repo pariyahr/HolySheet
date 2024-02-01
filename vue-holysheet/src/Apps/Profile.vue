@@ -212,7 +212,7 @@ export default {
         async handleSubmit(event) {
             event.preventDefault();
 
-            this.profile_pic = event.target.elements.file.files[0].name;
+            this.profile_pic = event.target.elements.file.files[0];
             const formData = new FormData(event.target);
             formData.append('file', this.profile_pic);
             const csrf_token = document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];

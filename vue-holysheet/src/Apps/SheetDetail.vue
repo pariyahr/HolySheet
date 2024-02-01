@@ -18,7 +18,7 @@
 
 
 
-                  <div class="trending-sheets"  style="margin-top: 20px; width: 50%">
+                  <div class="trending-sheets"  style="margin-top: 20px; width: 500px">
                       <h1 >{{ sheet.name }}</h1>
                         <div>
 

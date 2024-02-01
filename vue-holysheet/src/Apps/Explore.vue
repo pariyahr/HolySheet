@@ -52,7 +52,7 @@ export default {
       visib2: "",
       showSearch: false,
       searchQuery: '',
-        apiURL: 'http://127.0.0.1:8000/api/concerto/',
+        apiURL: '/api/concerto/',
         trendingSheets :[]
       // trendingSheets: [
       //   {
