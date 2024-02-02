@@ -27,93 +27,108 @@
     <div class="field" style="position: absolute; left: 87%; top: 5%; width: 10%">
         <a1> Assets: {{ component.assests }}</a1>
     </div>
+      <div class="main-content">
+        <div class="profile-column" >
+          <img class="profile-picture" :src="profilePic" alt="Profile Picture"/>
+          <h1 style="margin-top: 10px; margin-bottom: 30px;">{{ component.username }}</h1>
 
-    <div class="profile-header" style="position: absolute; top: 12%; left: 5%;">
+            <div class="inner_content" style ="margin-bottom: 30px;" v-if="visib2">
+                <li class="posts" style="list-style: none;">
+                  <div class="stat-number">{{component.posts}}</div>
+                  <div class="stat-label">Posts</div>
+                </li>
+                <li class="followers" style="list-style: none;">
+                  <div class="stat-number">{{component.followers}}</div>
+                  <div class="stat-label">Followers</div>
+                </li>
+                <li class="followings" style="list-style: none;">
+                  <div class="stat-number">{{component.followings}}</div>
+                  <div class="stat-label">Followings</div>
+                </li>
+            </div>
 
-      <img class="profile-picture" :src="profilePic" alt="Profile Picture" />
-    </div>
-    <div class="inner_content" style ="margin-bottom: 10px; position: absolute; top: 50%; left: 18.3%;" v-if="visib2">
-        <li class="posts" style="list-style: none;">
-          <div class="stat-number">{{component.posts}}</div>
-          <div class="stat-label">Posts</div>
-        </li>
-        <li class="followers" style="list-style: none;">
-          <div class="stat-number">{{component.followers}}</div>
-          <div class="stat-label">Followers</div>
-        </li>
-        <li class="followings" style="list-style: none;">
-          <div class="stat-number">{{component.followings}}</div>
-          <div class="stat-label">Followings</div>
-        </li>
-    </div>
-    <div class="profile-details" style="position: absolute; top: 8%; left: 16.5%;">
-       <h1 class="username">{{component.username}}</h1>
-    </div>
-    <div style="position: absolute; top: 58%; left: 7.5%;">
-    <div class="container">
-        <div class="field" style="width: 150px;">
-            <button v-on:click="vis" type="submit">edit profile</button>
-        </div>
-    </div>
-    <form @submit="handleSubmit" method="POST" >
-    <div v-if="visib" class="container">
-        <div class="field">
-            <a1>Change Username</a1>
-            <input type="text" placeholder="New Username" name="username" required>
-        </div>
-        <div class="field">
-            <a1>Change Password</a1>
-            <input type="password" placeholder="New Password" name="password" required>
-        </div>
-        <div class="field1">
-            <a1>Profile Picture</a1>
-            <input  type="file" @change="handleFileUpload" id="file" name="file">
-        </div>
-        <div class="field">
-            <button type="submit">Submit</button>
-        </div>
-    </div>
-    </form>
-    </div>
-
-    <div style="position: absolute; top: 15%; left: 70%;">
-
-    <div class="container">
             <div class="field" style="width: 150px;">
-                <a1>Saved</a1>
+                <button v-on:click="vis" type="submit">edit profile</button>
+            </div>
+
+          <form @submit="handleSubmit" method="POST" >
+            <div v-if="visib" class="container">
+                <div class="field">
+                    <a1>Change Username</a1>
+                    <input type="text" placeholder="New Username" name="username" required>
+                </div>
+                <div class="field">
+                    <a1>Change Password</a1>
+                    <input type="password" placeholder="New Password" name="password" required>
+                </div>
+                <div class="field1">
+                    <a1>Profile Picture</a1>
+                    <input  type="file" @change="handleFileUpload" id="file" name="file">
+                </div>
+                <div class="field">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+            </form>
+        </div>
+
+        <div class="posts-column" v-if="visib2" >
+
+
+
+         <div class="field" style="width: 150px;margin-top: 20px; float: left">
+             <a1>Posts</a1>
+         </div>
+
+
+
+          <div class="trending-sheets" style="margin-top: 20px; width: 100%; height: 50%;">
+              <div class="scroll-scope" style="padding: 20px">
+                  <ul1>
+                      <li1 v-for="sheet in postedSheets" :key="sheet.id" @click="goToSheetPage(sheet.id)">
+                          <sheet-display :sheet="sheet"></sheet-display>
+                      </li1>
+                  </ul1>
+              </div>
+          </div>
+
+        </div>
+
+
+        <div class="sheets-column" >
+          <!-- Saved Sheets content -->
+
+
+
+                    <div class="field" style="width: 150px; margin-top: 20px;">
+                        <a1>Saved</a1>
+                    </div>
+
+
+            <div class="trending-sheets" style="margin-top: 20px; width: 100%;">
+                <div class="scroll-scope" style="padding: 20px">
+                    <ul1>
+                        <li1 v-for="sheet in savedSheets" :key="sheet.id" @click="goToSheetPage(sheet.id)">
+                            <sheet-display :sheet="sheet"></sheet-display>
+                        </li1>
+                    </ul1>
+                </div>
             </div>
         </div>
-
-    <div class="trending-sheets" style="margin-top: 20px; width: 70%;">
-        <div class="scroll-scope" style="padding: 20px">
-            <ul1>
-                <li1 v-for="sheet in savedSheets" :key="sheet.id" @click="goToSheetPage(sheet.id)">
-                    <sheet-display :sheet="sheet"></sheet-display>
-                </li1>
-            </ul1>
-        </div>
-    </div>
-    </div>
-
-    <div style="position: absolute; top: 15%; left: 35%;" v-if="visib2">
-
-    <div class="container">
-            <div class="field" style="width: 150px;">
-                <a1>Posts</a1>
-            </div>
-        </div>
+      </div>
 
 
-    <div class="trending-sheets" style="margin-top: 20px; width: 100%; height: 50%;">
-        <div class="scroll-scope" style="padding: 20px">
-            <ul1>
-                <li1 v-for="sheet in postedSheets" :key="sheet.id" @click="goToSheetPage(sheet.id)">
-                    <sheet-display :sheet="sheet"></sheet-display>
-                </li1>
-            </ul1>
-        </div>
-    </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
 
   </div>
 
@@ -233,11 +248,15 @@ export default {
                 .then(response => {
                     // Handle success response
                     console.log(response.data.message);
+                    this.profilePic = response.data.newImageUrl;
+                    this.fetchComponents()
+                    this.visib=""
                 })
                 .catch(error => {
                     // Handle error response
                     console.error(error);
                 });
+
 
         }
     }
@@ -256,5 +275,7 @@ h1 {
   background-color: #222;
   color: #fff;
 }
+
+
 
 </style>

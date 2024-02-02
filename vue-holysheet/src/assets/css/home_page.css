@@ -468,12 +468,13 @@ ul.navbar li a:hover{
 }
 
 .profile-picture {
+
   width: 250px; /* Adjust as needed */
   height: 250px; /* Adjust as needed */
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 20px;
-  margin-left: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   box-shadow: 0 0 10px 0;
   backdrop-filter: blur(5px);
 }
@@ -497,12 +498,12 @@ ul.navbar li a:hover{
 }
 
 .posts{
-  margin-right: 30px;
+  margin-right: 10px;
   padding-bottom: 25px;
-  padding-left: 55px;
+  margin-left: 19px;
 }
 .followers, .followings {
-  margin-right: 20px;
+
   padding-bottom: 25px;
 }
 
@@ -554,16 +555,15 @@ ul.navbar li a:hover{
 .inner_content {
   display: flex;
   flex-direction: row;
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  justify-content: space-between;
+
+
   z-index: 999;
   text-align: center;
   padding-top: 30px;
   padding-right: 30px;
   padding-left: 30px;
-  width: 370px;
+  width: 70%;
   box-shadow: 0 0 10px 0;
   /*backdrop-filter: blur(50px);*/
   border-radius: 30px;
@@ -623,4 +623,71 @@ li1 {
     position: relative; /* Keeps your existing position styling */
 }
 
+.main-content {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  height: 80%;
+}
+
+.profile-column {
+  flex: 1;
+  align-items: center; /* Aligns children (including .inner_content) to the center */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 1%;
+
+}
+
+.posts-column, .sheets-column{
+  flex: 1;
+  align-items: flex-start; /* Aligns children (including .inner_content) to the center */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  height: 100%;
+}
+
+/* Profile information */
+.profile-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+
+.edit-profile-btn {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1000px) {
+  .main-content {
+     /* Assuming the navbar is 60px high */
+    height: calc(2000px - 60px);
+    flex-direction: column;
+    align-items: center;
+    overflow: auto; /* Enable vertical scrolling */
+/* Set the maximum height to viewport height */
+    padding-bottom: 20px; /* Optional: adds some space at the bottom */
+  }
+
+  .profile-column, .posts-column, .sheets-column {
+    width: 80%; /* Full width for smaller screens */
+    margin-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .profile-picture{
+    width: 200px;
+    height: 200px;
+  }
+
+}
+
+.bg-img, .content {
+  height: 100vh;  /* Adjust based on your layout */
+  overflow-y: auto;
+}
 

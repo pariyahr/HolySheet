@@ -2,7 +2,7 @@
   <div class="sheet-display">
     <div class="sheet-image">
       <!-- Example image; replace with actual image source from your data -->
-       <img :SRC="firstPageUrl"  />
+       <img :SRC="firstPageUrl" loading="lazy"  />
     </div>
     <div class="sheet-info">
       <!-- Example title; replace with actual title from your data -->

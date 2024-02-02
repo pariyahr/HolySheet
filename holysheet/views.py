@@ -163,7 +163,8 @@ def handle(request):
     component.profile_picture = request.FILES.get('file')
     print(request.POST)
     component.save()
-    return JsonResponse({'message': 'Component updated successfully'})
+    image_url = request.build_absolute_uri(settings.MEDIA_URL + component.profile_picture.name)
+    return JsonResponse({'newImageUrl': image_url})
 
 
 @api_view(('GET',))
