@@ -9,9 +9,6 @@
     <li><div class="active">
         <RouterLink to="/Profile"> Profile </RouterLink>
     </div></li>
-    <li class="settings-link"><div class="active">
-        <RouterLink to="/settings"> Settings </RouterLink>
-    </div></li>
   </ul>
 </template>
 

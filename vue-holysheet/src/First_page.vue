@@ -1,7 +1,6 @@
 
 <template>
 
-  <audio ref="audioPlayer" src="/media/file_example_MP3_700KB.mp3" loop></audio>
   <div class="bg-img">
       <div class = "stacked-content">
         <div class="content">
@@ -19,7 +18,12 @@
             <button @click="playMusic">Play Music</button>
         </div>
       </div>
+      <audio controls loop id="audio-id">
+            <source src="/media/file_example_MP3_700KB.mp3">
+      </audio>
+
 </div>
+
   <RouterView/>
 </template>
 

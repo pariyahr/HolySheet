@@ -5,7 +5,6 @@ import Explore from "@/Apps/Explore.vue"
 import Profile from "@/Apps/Profile.vue"
 import Add from "@/Apps/Add.vue"
 import SheetDetail from "@/Apps/SheetDetail.vue";
-import Settings from "@/Apps/Settings.vue";
 
 const routes= [
     {
@@ -33,10 +32,7 @@ const routes= [
         name: 'SheetDetail',
         component: SheetDetail
       },
-    {
-        path: '/settings',
-        component: Settings
-    }
+
 ]
 
 const router = createRouter({
