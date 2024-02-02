@@ -1,20 +1,7 @@
 <template>
   <div class="bg-img">
     <div class="content1">
-      <ul class="navbar">
-            <li><div class="active">
-                <RouterLink to="/Explore"> Explore </RouterLink>
-            </div></li>
-            <li><div class="active" v-if="visib2">
-                <RouterLink to="/Add"> Add </RouterLink>
-            </div></li>
-            <li><div class="active">
-                <RouterLink to="/Profile"> Profile </RouterLink>
-            </div></li>
-            <li class="search-icon" @click="toggleSearchBar">
-            <a href="#"><br></a>
-            </li>
-        </ul>
+      <Navbar :isSeller="visib2"></Navbar>
       <div class="search-bar" v-show="showSearch">
         <input type="text" v-model="searchQuery" placeholder="Search..." />
         <button @click="searchSheets">Search</button>
@@ -40,10 +27,13 @@
 import SheetDisplay from './SheetDisplay.vue';
 import router from "@/router";
 import axios from "axios";
+import Navbar from "@/Apps/Navbar.vue";
+
 
 export default {
   name: "Explore_Page",
   components: {
+      Navbar,
     SheetDisplay
   },
   data() {

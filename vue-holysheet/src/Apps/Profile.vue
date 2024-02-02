@@ -9,20 +9,7 @@
 <div :class="{ 'dark-mode': isDarkMode }">
 <div class="bg-img" v-for="component in components" :key="component.username">
     <div class="content">
-        <ul class="navbar">
-            <li><div class="active">
-                <RouterLink to="/Explore"> Explore </RouterLink>
-            </div></li>
-            <li><div class="active" v-if="visib2">
-                <RouterLink to="/Add"> Add </RouterLink>
-            </div></li>
-            <li><div class="active">
-                <RouterLink to="/Profile"> Profile </RouterLink>
-            </div></li>
-            <li><div class="active">
-                <button @click="changeButtonText">{{ buttonText }}</button>
-            </div></li>
-        </ul>
+        <Navbar :isSeller="visib2"></Navbar>
 
     <div class="field" style="position: absolute; left: 87%; top: 5%; width: 10%">
         <a1> Assets: {{ component.assests }}</a1>
@@ -143,10 +130,11 @@
 import axios from 'axios';
 import SheetDisplay from "@/Apps/SheetDisplay.vue";
 import router from "@/router";
+import Navbar from "@/Apps/Navbar.vue";
 
 export default {
     name: "Profile_page",
-    components: {SheetDisplay},
+    components: {Navbar, SheetDisplay},
     data() {
       return {
         profilePic: "",

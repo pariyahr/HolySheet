@@ -1,7 +1,7 @@
 
 <template>
 
-
+  <audio ref="audioPlayer" src="/media/file_example_MP3_700KB.mp3" loop></audio>
   <div class="bg-img">
       <div class = "stacked-content">
         <div class="content">
@@ -16,6 +16,7 @@
             <div class="copyright">
                 <a> © alireza amiri, pariya hajipour, amirreza ghadyani</a>
             </div>
+            <button @click="playMusic">Play Music</button>
         </div>
       </div>
 </div>
@@ -24,7 +25,10 @@
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+
 </script>
+
+
 
 
 <style scoped src="./assets/css/first_page.css">

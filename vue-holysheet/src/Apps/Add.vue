@@ -1,18 +1,7 @@
 <template>
     <div class="bg-img">
         <div class="content">
-            <ul class="navbar">
-                <li><div class="active">
-                    <RouterLink to="/Explore"> Explore </RouterLink>
-                </div></li>
-                <li><div class="active">
-                    <RouterLink to="/Add"> Add </RouterLink>
-                </div></li>
-                <li><div class="active">
-                    <RouterLink to="/Profile"> Profile </RouterLink>
-                </div></li>
-
-            </ul>
+            <Navbar :isSeller="visib2"></Navbar>
 
             <!-- Form for adding sheet music -->
 
@@ -82,12 +71,17 @@
 
 <script>
 import axios from 'axios';
+import Navbar from "@/Apps/Navbar.vue";
 
 
 export default {
     name: "Add_page",
+    components: {Navbar},
+
     data() {
         return {
+            components:[],
+            visib2: "",
             newSheet: {
                 name: '',
                 genre: '',
@@ -99,8 +93,18 @@ export default {
             },
             imagePreviewUrl: null
         };
+
     },
     methods: {
+        async fetchComponents() {
+            try {
+                const response = await axios.get('/components/');
+                this.components = response.data;
+                this.visib2 = this.components[0].is_seller;
+            } catch (error) {
+                console.error('Error fetching components:', error);
+            }
+        },
        handleFileUpload(event) {
             const file = event.target.files[0];
             if (file) {
@@ -138,6 +142,9 @@ export default {
                     // Handle error (e.g., showing an error message)
                 });
         }
+    },
+    mounted() {
+        this.fetchComponents();
     }
 }
 </script>
