@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+  backend:
+    build: 
+      context: .
+
+    environment:
+      - DEBUG=0
+      - DJANGO_ALLOWED_HOSTS=backend
+      - DJANGO_SETTINGS_MODULE=web_project.settings.prod
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=holysheet
+      - SQL_USER=postgres
+      - SQL_PASSWORD=postgres
+      - SQL_HOST=db
+      - SQL_PORT=5432
+
+    volumes:
+      - static:/backend/static
+      - media:/backend/media
+
+    depends_on:
+      - db
+
+    restart: unless-stopped
+
+  db:
+    image: postgres:15.5-alpine3.18
+
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=holysheet
+      - POSTGRES_USER=postgres
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "holysheet"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s  
+
+    restart: unless-stopped
+
+  
+  proxy:
+    build: 
+      context: ./docker/nginx/
+
+    ports:
+      - 8080:80
+
+    volumes:
+      - static:/usr/share/nginx/html/static
+      - media:/usr/share/nginx/html/media
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD-SHELL", "service", "nginx", "status"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  pgdata:
+  static:
+  media:
